@@ -35,10 +35,11 @@ define(function() {
 				attr = option.attributes,
 				val = option.getAttribute('value') === null ? '' : option.getAttribute('value');
 			if (index === 0) {
-				// log('Default option', '"' + text + '"');
-				visualSelectHTML += '<div class="vs-default-option" data-value="' + val + '">' + html + '</div>' +
-									'<ul class="">' +
-										'<li class="vs-option" data-value="' + val + '">' + html + '</li>';
+				// Show first item as selected by default
+				visualSelectHTML += ''+
+					'<div class="vs-default-option" data-value="' + val + '">' + html + '</div>' +
+					'<ul class="">' +
+						'<li class="vs-option" data-value="' + val + '">' + html + '</li>';
 			} else {
 				visualSelectHTML += '<li class="vs-option" data-value="' + val + '">' + html + '</li>';
 			}
