@@ -45,7 +45,6 @@ define(function() {
 				visualSelectHTML += '<li class="vs-option" data-value="' + val + '">' + text + '</li>';
 			}
 		})
-
 		visualSelectHTML += '</ul></div>';
 		select.insertAdjacentHTML('afterend', visualSelectHTML);
 
@@ -57,12 +56,8 @@ define(function() {
 				var target = ev.target,
 					uuid = target.parentNode.parentNode.getAttribute('data-vs-uuid');
 				query('select[data-vs-uuid="' + uuid + '"]').value = target.getAttribute('data-value');
-
 				query('.visual-select[data-vs-uuid="' + uuid +'"] .vs-default-option').innerHTML = target.innerText;
-				// log('Target text', target.innerText)
-
 				target.parentNode.parentNode.classList.remove('open');
-				// log('New select - ' + uuid + ' value', query('select[data-vs-uuid="' + uuid + '"]').value);
 			});
 		})
 
@@ -75,18 +70,14 @@ define(function() {
 				vs.classList.remove('open');
 			});
 
-			// log('Visual Select open');
 			var target = ev.target;
-			// log('Target', target.parentNode);
 			target.parentNode.classList.add('open');
 
 			var close = document.addEventListener('click', function(ev) {
 				ev.preventDefault();
 				ev.stopPropagation();
 				var closeTarget = ev.target;
-
-				if (!closeTarget.classList.contains('vs-option', 'vs-default-option')) {
-					// log('%cClose ', 'color: red;');
+				if ( ! closeTarget.classList.contains('vs-option', 'vs-default-option') ) {
 					queryAll('.visual-select').forEach(function(vs) {
 						vs.classList.remove('open');
 					});
