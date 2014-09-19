@@ -74,17 +74,6 @@ define(function() {
 			var target = ev.target;
 			target.parentNode.classList.add('open');
 
-			var close = document.addEventListener('click', function(ev) {
-				ev.preventDefault();
-				ev.stopPropagation();
-				var closeTarget = ev.target;
-				if ( ! closeTarget.classList.contains('ss-option', 'ss-default-option') ) {
-					queryAll('.style-select').forEach(function(styleSelectEl) {
-						styleSelectEl.classList.remove('open');
-					});
-				}
-			});
-
 		});
 
 	};
