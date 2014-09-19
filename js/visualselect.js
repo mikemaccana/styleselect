@@ -49,12 +49,11 @@ define(function() {
 		visualSelectHTML += '</ul></div>';
 		select.insertAdjacentHTML('afterend', visualSelectHTML);
 
-		// Add event listeners
+		// Add event listeners to our visual select
 		var visualSelectOptions = queryAll('[data-vs-uuid] li');
-
-		for (var i = 0; i < visualSelectOptions.length; i++) {
-			var vs_option = visualSelectOptions.item(i);
-			vs_option.addEventListener('click', function(ev) {
+		visualSelectOptions.forEach(function(unused, index){
+			var visualSelectOption = visualSelectOptions.item(index);
+			visualSelectOption.addEventListener('click', function(ev) {
 				var target = ev.target,
 					uuid = target.parentNode.parentNode.getAttribute('data-vs-uuid');
 				query('select[data-vs-uuid="' + uuid + '"]').value = target.getAttribute('data-value');
@@ -65,7 +64,7 @@ define(function() {
 				target.parentNode.parentNode.classList.remove('open');
 				// log('New select - ' + uuid + ' value', query('select[data-vs-uuid="' + uuid + '"]').value);
 			});
-		}
+		})
 
 		query('.visual-select[data-vs-uuid="' + uuid + '"] .vs-default-option').addEventListener('click', function(ev) {
 			ev.preventDefault();
