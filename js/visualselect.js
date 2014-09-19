@@ -15,8 +15,8 @@ define(function() {
 		};
 
 		var body = document.body,
-			select = query(selectId),
-			options = queryChildren(selectId, 'option'),
+			select = query(selector),
+			options = queryChildren(selector, 'option'),
 			uuid = 'vs-xxxx-xxxx-xxxx-xxxx-xxxx'.replace(
 				/[xy]/g,
 				function(c) {
@@ -42,7 +42,7 @@ define(function() {
 			else {
 				vs_select_html += '<li class="vs-option" data-value="' + val + '">' + html + '</li>';
 			}
-		};
+		}
 		vs_select_html += '</ul></div>';
 		select.insertAdjacentHTML('afterend', vs_select_html);
 
@@ -63,14 +63,16 @@ define(function() {
 				target.parentNode.parentNode.classList.remove('open');
 				// log('New select - ' + uuid + ' value', query('select[data-vs-uuid="' + uuid + '"]').value);
 			});
-		};
+		}
 
 		query('.visual-select[data-vs-uuid="' + uuid + '"] .vs-default-option').addEventListener('click', function(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
 
 			// Close all Visual Selects
-			queryAll('.visual-select').forEach(function(vs) { vs.classList.remove('open'); });
+			queryAll('.visual-select').forEach(function(vs) {
+				vs.classList.remove('open');
+			});
 
 			// log('Visual Select open');
 			var target = ev.target;
