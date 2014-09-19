@@ -49,9 +49,8 @@ define(function() {
 		visualSelectHTML += '</ul></div>';
 		select.insertAdjacentHTML('afterend', visualSelectHTML);
 
-		// Event listeners
-		var vs_container = query('[data-vs-uuid]'),
-			vs_options = queryAll('[data-vs-uuid] li');
+		// Add event listeners
+		var vs_options = queryAll('[data-vs-uuid] li');
 
 		for (var i = 0; i < vs_options.length; i++) {
 			var vs_option = vs_options.item(i);
