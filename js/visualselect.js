@@ -35,12 +35,13 @@ define(function() {
 				val = option.getAttribute('value') === null ? '' : option.getAttribute('value');
 
 			if (index === 0) {
-				// Show first item as selected by default
+				// Start list. and mark first item as default
 				visualSelectHTML += ''+
 					'<div class="vs-default-option" data-value="' + val + '">' + text + '</div>' +
 					'<ul class="">' +
 						'<li class="vs-option" data-value="' + val + '">' + text + '</li>';
 			} else {
+				// Continue list
 				visualSelectHTML += '<li class="vs-option" data-value="' + val + '">' + text + '</li>';
 			}
 		})
