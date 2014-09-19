@@ -50,10 +50,10 @@ define(function() {
 		select.insertAdjacentHTML('afterend', visualSelectHTML);
 
 		// Add event listeners
-		var vs_options = queryAll('[data-vs-uuid] li');
+		var visualSelectOptions = queryAll('[data-vs-uuid] li');
 
-		for (var i = 0; i < vs_options.length; i++) {
-			var vs_option = vs_options.item(i);
+		for (var i = 0; i < visualSelectOptions.length; i++) {
+			var vs_option = visualSelectOptions.item(i);
 			vs_option.addEventListener('click', function(ev) {
 				var target = ev.target,
 					uuid = target.parentNode.parentNode.getAttribute('data-vs-uuid');
