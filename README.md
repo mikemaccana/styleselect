@@ -20,11 +20,11 @@ Include `styleselect.scss` in your project.
 
 Style Select is a require/AMD module:
 
-  var styleSelect = require('styleSelect');
+    var styleSelect = require('styleSelect');
 
 To style a select box:
 
-  styleSelect(selector);
+    styleSelect(selector);
 
 Whwere `selector` is a CSS selector.
 
