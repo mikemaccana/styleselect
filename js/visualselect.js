@@ -1,8 +1,18 @@
-define([
-	'waves/utils'
-],	function() {
+define(function() {
+	var VisualSelect = function(selector) {
 
-	var VisualSelect = function(selectId) {
+		// Quick aliases
+		var query = document.querySelector.bind(document);
+		var queryAll = document.querySelectorAll.bind(document);
+		if ( ! NodeList.prototype.forEach ) {
+			NodeList.prototype.forEach = Array.prototype.forEach;
+		}
+		var log = console.log.bind(console)
+
+
+		var queryChildren = function(elem, children) {
+			return query(elem).querySelectorAll(':scope ' + children)
+		};
 
 		var body = document.body,
 			select = query(selectId),
