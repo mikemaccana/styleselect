@@ -32,7 +32,7 @@ define(function() {
 		options.forEach(function(option, index){
 			var text = option.innerText,
 				attr = option.attributes,
-				val = option.getAttribute('value') === null ? '' : option.getAttribute('value');
+				val = option.getAttribute('value') ? option.getAttribute('value') : '' ;
 
 			if (index === 0) {
 				// Start list. and mark first item as default
