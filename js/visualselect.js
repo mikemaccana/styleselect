@@ -28,21 +28,21 @@ define(function() {
 
 		select.setAttribute('data-vs-uuid', uuid);
 
-		for (var i = 0; i < options.length; i++) {
-			var html = options[i].innerHTML,
-				text = options[i].innerText,
-				attr = options[i].attributes,
-				val = options[i].getAttribute('value') === null ? '' : options[i].getAttribute('value');
-			if (i === 0) {
+		options.forEach(function(option, index){
+			var html = option.innerHTML,
+				text = option.innerText,
+				attr = option.attributes,
+				val = option.getAttribute('value') === null ? '' : option.getAttribute('value');
+			if (index === 0) {
 				// log('Default option', '"' + text + '"');
 				visualSelectHTML += '<div class="vs-default-option" data-value="' + val + '">' + html + '</div>' +
 									'<ul class="">' +
 										'<li class="vs-option" data-value="' + val + '">' + html + '</li>';
-			}
-			else {
+			} else {
 				visualSelectHTML += '<li class="vs-option" data-value="' + val + '">' + html + '</li>';
 			}
-		}
+		})
+
 		visualSelectHTML += '</ul></div>';
 		select.insertAdjacentHTML('afterend', visualSelectHTML);
 
