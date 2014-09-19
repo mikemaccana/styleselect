@@ -30,6 +30,7 @@ select[data-ss-uuid] {
 
 	&.open {
 		.ss-default-option {
+			display: none;
 		}
 		ul {
 			display: table;
