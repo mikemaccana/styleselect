@@ -1,0 +1,15 @@
+{
+  "predef": [
+    // Handle Node/CommonJS modules
+    "module",
+    // Handle RequireJS/AMD modules
+    "define",
+    "require",
+    // Node coems with console, so does every modern browser
+    "console",
+    // We are lazy
+    "log"
+  ],
+  "asi" : true, // Tolerate Automatic Semicolon Insertion (no semicolons).
+  "esnext": true
+}
