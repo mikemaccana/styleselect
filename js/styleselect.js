@@ -57,7 +57,8 @@ define(function() {
 			var styleSelectOption = styleSelectOptions.item(index);
 			styleSelectOption.addEventListener('click', function(ev) {
 				var target = ev.target,
-					uuid = target.parentNode.parentNode.getAttribute('data-ss-uuid'),
+					styledSelectBox = target.parentNode.parentNode,
+					uuid = styledSelectBox.getAttribute('data-ss-uuid'),
 					newValue = target.getAttribute('data-value');
 				// Update real select box
 				query('select[data-ss-uuid="' + uuid + '"]').value = newValue;
@@ -65,7 +66,7 @@ define(function() {
 				var selectedOption = query('.style-select[data-ss-uuid="' + uuid +'"] .ss-selected-option')
 				selectedOption.innerText = target.innerText;
 				selectedOption.dataset.value = newValue;
-				target.parentNode.parentNode.classList.remove('open');
+				styledSelectBox.classList.remove('open');
 			});
 		})
 
