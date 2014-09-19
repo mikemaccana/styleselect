@@ -1,0 +1,119 @@
+select[data-vs-uuid] {
+	opacity: .5; // Debug
+	display: none;
+	pointer-events: none;
+}
+
+.visual-select {
+
+    //outline: 1px solid rgba(255,255,0,.5);
+    display: block;
+    position: relative;
+    float: left;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    text-align: left;
+
+    width: 140px; // Default width
+
+	&, * {
+	    padding: 0;
+	    margin: 0;
+	    display: block;
+	}
+
+	ul {
+		top: 0;
+		left: 0;
+		position: absolute;
+	    list-style-type: none;
+	    float: left;
+	    width: 100%;
+	    display: none;
+	    //outline: 1px solid yellow;
+	    //background: white;
+	}
+
+	&.open {
+
+		.vs-default-option {
+			//opacity: 0;
+		}
+		ul {
+			display: table;
+		}
+
+	}
+
+	li,
+	div {
+		color: black;
+		font-weight: 300;
+	    cursor: pointer;
+	    list-style-type: none;
+	    display: block;
+	    clear: both;
+	    width: 100%;
+	    float: left;
+	    //background: white;
+		&:hover {
+		    //background: rgba(255,255,0,.35);
+		}
+	}
+
+	div {
+	    //outline: 1px solid red;
+	    position: relative;
+		&:hover {
+	    	//background: rgba(255,0,0,.15);
+	    }
+	}
+
+}
+
+
+
+
+
+
+
+
+/*
+	.visual-select {
+		width: 180px;
+		//z-index: 1;
+
+		ul {
+			z-index: 1;
+		}
+		&.open ul {
+			border: 1px solid rgba(148,153,159,1);
+		}
+
+		.vs-default-option {
+			background-color: transparent;
+			border-bottom: 1px solid white;
+		}
+		.vs-option {
+			border-bottom: 1px solid rgba(255,255,255,.05);
+			&:last-child {
+				border: none;
+			}
+			&:hover {
+				background: rgba(121, 163, 164, 1.0000);
+				color: rgba(52, 75, 75, 1.0000);
+			}
+		}
+
+		.vs-default-option,
+		.vs-option {
+			text-align: center;
+			font-size: 12pt;
+			color: white;
+			padding: 6px 12px;
+			background: rgba(43,53,66,.98);
+
+		}
+
+	}
+*/
