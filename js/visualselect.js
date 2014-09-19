@@ -1,4 +1,5 @@
 define(function() {
+	// Selector String - CSS selector for a single visual select box
 	var VisualSelect = function(selector) {
 
 		// Quick aliases
