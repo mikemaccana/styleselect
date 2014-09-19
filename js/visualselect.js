@@ -30,18 +30,18 @@ define(function() {
 		select.setAttribute('data-vs-uuid', uuid);
 
 		options.forEach(function(option, index){
-			var html = option.innerHTML,
-				text = option.innerText,
+			var text = option.innerText,
 				attr = option.attributes,
 				val = option.getAttribute('value') === null ? '' : option.getAttribute('value');
+
 			if (index === 0) {
 				// Show first item as selected by default
 				visualSelectHTML += ''+
-					'<div class="vs-default-option" data-value="' + val + '">' + html + '</div>' +
+					'<div class="vs-default-option" data-value="' + val + '">' + text + '</div>' +
 					'<ul class="">' +
-						'<li class="vs-option" data-value="' + val + '">' + html + '</li>';
+						'<li class="vs-option" data-value="' + val + '">' + text + '</li>';
 			} else {
-				visualSelectHTML += '<li class="vs-option" data-value="' + val + '">' + html + '</li>';
+				visualSelectHTML += '<li class="vs-option" data-value="' + val + '">' + text + '</li>';
 			}
 		})
 
