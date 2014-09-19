@@ -8,11 +8,11 @@ define(function() {
 		if ( ! NodeList.prototype.forEach ) {
 			NodeList.prototype.forEach = Array.prototype.forEach;
 		}
-		var log = console.log.bind(console)
+		if ( ! HTMLCollection.prototype.forEach ) {
+			HTMLCollection.prototype.forEach = Array.prototype.forEach;
+		}
 
-		var queryChildren = function(elem, children) {
-			return query(elem).querySelectorAll(':scope ' + children)
-		};
+		var log = console.log.bind(console)
 
 		// Used to match select boxes to their style select partners
 		var makeUUID = function(){
@@ -24,7 +24,7 @@ define(function() {
 		}
 
 		var select = query(selector),
-			options = queryChildren(selector, 'option'),
+			options = select.children,
 			uuid = makeUUID(),
 			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
 
