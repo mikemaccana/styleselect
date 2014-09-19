@@ -22,8 +22,7 @@ define(function() {
 			return UUID
 		}
 
-		var body = document.body,
-			select = query(selector),
+		var select = query(selector),
 			options = queryChildren(selector, 'option'),
 			uuid = makeUUID(),
 			visualSelectHTML = '<div class="visual-select" data-vs-uuid="' + uuid + '">';
