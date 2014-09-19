@@ -4,7 +4,6 @@ define([
 
 	var VisualSelect = function(selectId) {
 
-		// log('selectId', selectId);
 		var body = document.body,
 			select = query(selectId),
 			options = queryChildren(selectId, 'option'),
