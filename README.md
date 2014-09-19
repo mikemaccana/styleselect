@@ -6,7 +6,9 @@ Does not require jQuery, or any other dependencies.
 
 ## Demo
 
-There's a live demop if the code in this repo. Just run `http-server` (or whatever your preferred static webserver is) in the current directory.
+There's a live demo if the code in this repo. Just run `http-server` (or whatever your preferred static webserver is) in the current directory.
+
+Open the JavaScript console on the demo page for more instructions.
 
 ## Usage:
 
