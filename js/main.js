@@ -1,7 +1,6 @@
-define(['visualselect'], function(visualSelect){
+define(['styleSelect'], function(styleSelect){
   var log = console.log.bind(console)
 
-  visualSelect('select')
-
-  log('hello')
+  styleSelect('select')
+  log('Select box above should now by styled')
 })

@@ -1,9 +1,9 @@
-select[data-vs-uuid] {
+select[data-ss-uuid] {
 	display: none;
 	pointer-events: none;
 }
 
-.visual-select {
+.style-select {
 	display: block;
 	position: relative;
 	float: left;
@@ -29,7 +29,7 @@ select[data-vs-uuid] {
 	}
 
 	&.open {
-		.vs-default-option {
+		.ss-default-option {
 		}
 		ul {
 			display: table;
