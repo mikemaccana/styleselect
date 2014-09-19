@@ -14,16 +14,18 @@ define(function() {
 			return query(elem).querySelectorAll(':scope ' + children)
 		};
 
+		var makeUUID = function(){
+			var UUID = 'vs-xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function(c) {
+				var r = Math.random() * 16|0, v = c == 'x'? r : r&0x3|0x8;
+				return v.toString(16);
+			})
+			return UUID
+		}
+
 		var body = document.body,
 			select = query(selector),
 			options = queryChildren(selector, 'option'),
-			uuid = 'vs-xxxx-xxxx-xxxx-xxxx-xxxx'.replace(
-				/[xy]/g,
-				function(c) {
-					var r = Math.random() * 16|0, v = c == 'x'? r : r&0x3|0x8;
-					return v.toString(16);
-				}
-			),
+			uuid = makeUUID(),
 			visualSelectHTML = '<div class="visual-select" data-vs-uuid="' + uuid + '">';
 
 		select.setAttribute('data-vs-uuid', uuid);
