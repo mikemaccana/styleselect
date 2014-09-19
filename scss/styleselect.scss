@@ -29,7 +29,7 @@ select[data-ss-uuid] {
 	}
 
 	&.open {
-		.ss-default-option {
+		.ss-selected-option {
 			display: none;
 		}
 		ul {

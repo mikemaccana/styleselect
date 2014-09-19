@@ -2,7 +2,7 @@ define(function() {
 	// Selector String - CSS selector for a single style select box
 	var styleSelect = function(selector) {
 
-		// Quick aliases
+		// Quick aliases and polyfills if needed
 		var query = document.querySelector.bind(document);
 		var queryAll = document.querySelectorAll.bind(document);
 		if ( ! NodeList.prototype.forEach ) {
@@ -30,15 +30,16 @@ define(function() {
 
 		select.setAttribute('data-ss-uuid', uuid);
 
+		// Build styled clones of all the real options
 		options.forEach(function(option, index){
 			var text = option.innerText,
 				attr = option.attributes,
 				val = option.getAttribute('value') ? option.getAttribute('value') : '' ;
 
 			if (index === 0) {
-				// Start list. and mark first item as default
+				// Start list, and mark first item as selected-option - this is where we store state for the styled select box
 				styleSelectHTML += ''+
-					'<div class="ss-default-option" data-value="' + val + '">' + text + '</div>' +
+					'<div class="ss-selected-option" data-value="' + val + '">' + text + '</div>' +
 					'<ul class="">' +
 						'<li class="ss-option" data-value="' + val + '">' + text + '</li>';
 			} else {
@@ -49,24 +50,28 @@ define(function() {
 		styleSelectHTML += '</ul></div>';
 		select.insertAdjacentHTML('afterend', styleSelectHTML);
 
-		// Add event listeners to our style select
+		// Change real select box when a styled option is clicked
 		var styleSelectOptions = queryAll('[data-ss-uuid] li');
 		styleSelectOptions.forEach(function(unused, index){
+
 			var styleSelectOption = styleSelectOptions.item(index);
 			styleSelectOption.addEventListener('click', function(ev) {
 				var target = ev.target,
 					uuid = target.parentNode.parentNode.getAttribute('data-ss-uuid');
+				// Update real select box
 				query('select[data-ss-uuid="' + uuid + '"]').value = target.getAttribute('data-value');
-				query('.style-select[data-ss-uuid="' + uuid +'"] .ss-default-option').innerHTML = target.innerText;
+				// Set style select to show correct value
+				query('.style-select[data-ss-uuid="' + uuid +'"] .ss-selected-option').innerText = target.innerText;
 				target.parentNode.parentNode.classList.remove('open');
 			});
 		})
 
-		query('.style-select[data-ss-uuid="' + uuid + '"] .ss-default-option').addEventListener('click', function(ev) {
+		// When the current option is selected,
+		query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option').addEventListener('click', function(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			// Close all Style Selects
+			// Close all Style Selects (eg, other style selects on the page)
 			queryAll('.style-select').forEach(function(styleSelectEl) {
 				styleSelectEl.classList.remove('open');
 			});
