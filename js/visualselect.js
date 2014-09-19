@@ -14,6 +14,7 @@ define(function() {
 			return query(elem).querySelectorAll(':scope ' + children)
 		};
 
+		// Used to match select boxes to their visual select partners
 		var makeUUID = function(){
 			var UUID = 'vs-xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/x/g, function(c) {
 				var r = Math.random() * 16|0, v = c == 'x'? r : r&0x3|0x8;
