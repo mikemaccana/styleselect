@@ -26,7 +26,7 @@ To style a select box:
 
     styleSelect(selector);
 
-Whwere `selector` is a CSS selector.
+Where `selector` is a CSS selector.
 
 That's all. From then on you'll probably want to tweak styling.
 
