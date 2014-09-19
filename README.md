@@ -2,7 +2,7 @@
 
 Simple, standalone styling for select boxes in modern browsers.
 
-Does not require jQuery, or any other dependencies.
+**Pure vanilla JS, does not require jQuery, or any other dependencies.**
 
 ## Demo
 
