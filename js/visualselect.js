@@ -10,7 +10,6 @@ define(function() {
 		}
 		var log = console.log.bind(console)
 
-
 		var queryChildren = function(elem, children) {
 			return query(elem).querySelectorAll(':scope ' + children)
 		};
@@ -25,7 +24,7 @@ define(function() {
 					return v.toString(16);
 				}
 			),
-			vs_select_html = '<div class="visual-select" data-vs-uuid="' + uuid + '">';
+			visualSelectHTML = '<div class="visual-select" data-vs-uuid="' + uuid + '">';
 
 		select.setAttribute('data-vs-uuid', uuid);
 
@@ -36,16 +35,16 @@ define(function() {
 				val = options[i].getAttribute('value') === null ? '' : options[i].getAttribute('value');
 			if (i === 0) {
 				// log('Default option', '"' + text + '"');
-				vs_select_html += '<div class="vs-default-option" data-value="' + val + '">' + html + '</div>' +
+				visualSelectHTML += '<div class="vs-default-option" data-value="' + val + '">' + html + '</div>' +
 									'<ul class="">' +
 										'<li class="vs-option" data-value="' + val + '">' + html + '</li>';
 			}
 			else {
-				vs_select_html += '<li class="vs-option" data-value="' + val + '">' + html + '</li>';
+				visualSelectHTML += '<li class="vs-option" data-value="' + val + '">' + html + '</li>';
 			}
 		}
-		vs_select_html += '</ul></div>';
-		select.insertAdjacentHTML('afterend', vs_select_html);
+		visualSelectHTML += '</ul></div>';
+		select.insertAdjacentHTML('afterend', visualSelectHTML);
 
 		// Event listeners
 		var vs_container = query('[data-vs-uuid]'),
