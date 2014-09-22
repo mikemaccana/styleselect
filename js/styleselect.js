@@ -60,13 +60,20 @@ define(function() {
 					styledSelectBox = target.parentNode.parentNode,
 					uuid = styledSelectBox.getAttribute('data-ss-uuid'),
 					newValue = target.getAttribute('data-value');
-				// Update real select box
-				query('select[data-ss-uuid="' + uuid + '"]').value = newValue;
+
 				// Set style select to show correct value
 				var selectedOption = query('.style-select[data-ss-uuid="' + uuid +'"] .ss-selected-option')
 				selectedOption.innerText = target.innerText;
 				selectedOption.dataset.value = newValue;
 				styledSelectBox.classList.remove('open');
+
+				// Update real select box
+				var realSelect = query('select[data-ss-uuid="' + uuid + '"]')
+				realSelect.value = newValue;
+
+				// Send 'click' event to real select - to trigger any change events
+				var changeEvent = new Event('change');
+				return ! realSelect.dispatchEvent(changeEvent);
 			});
 		})
 
