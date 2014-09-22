@@ -2,11 +2,14 @@
 
 Simple, standalone styling for select boxes in modern browsers.
 
-**Pure vanilla JS, does not require jQuery, or any other dependencies.**
+ - **Does not require jQuery**, or any other dependencies.
+ - Written in SCSS for easy incorporation in your own code base.
+ - Minimal out of the box styling, so you won't have to override anything.
+ - Triggers 'change' events on real select boxes so you won't have to change event listeners.
 
 ## Demo
 
-There's a live demo if the code in this repo. Just run `http-server` (or whatever your preferred static webserver is) in the current directory.
+There's a live demo of the code in this repo. Just run `http-server` (or whatever your preferred static webserver is) in the current directory.
 
 Open the JavaScript console on the demo page for more instructions.
 
