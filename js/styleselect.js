@@ -51,7 +51,7 @@ define(function() {
 		select.insertAdjacentHTML('afterend', styleSelectHTML);
 
 		// Change real select box when a styled option is clicked
-		var styleSelectOptions = queryAll('[data-ss-uuid] li');
+		var styleSelectOptions = queryAll('[data-ss-uuid='+uuid+'] li');
 		styleSelectOptions.forEach(function(unused, index){
 
 			var styleSelectOption = styleSelectOptions.item(index);
