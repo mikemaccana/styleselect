@@ -73,7 +73,7 @@ define(function() {
 
 				// Send 'click' event to real select - to trigger any change events
 				var changeEvent = new Event('change');
-				return ! realSelect.dispatchEvent(changeEvent);
+				realSelect.dispatchEvent(changeEvent);
 			});
 		})
 
