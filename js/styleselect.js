@@ -25,6 +25,7 @@ define(function() {
 
 		var select = query(selector),
 			options = select.children,
+			selectedIndex = select.selectedIndex
 			uuid = makeUUID(),
 			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
 
@@ -36,7 +37,7 @@ define(function() {
 				attr = option.attributes,
 				val = option.getAttribute('value') ? option.getAttribute('value') : '' ;
 
-			if (index === 0) {
+			if (index === selectedIndex) {
 				// Start list, and mark first item as selected-option - this is where we store state for the styled select box
 				styleSelectHTML += ''+
 					'<div class="ss-selected-option" data-value="' + val + '">' + text + '</div>' +
