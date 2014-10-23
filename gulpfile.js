@@ -13,7 +13,8 @@ gulp.task('sass', function () {
   gulp
     .src('./scss/styleselect.scss')
     .pipe(sass({
-      paths: ['scss']
+      paths: ['scss'],
+      includePaths: ['./scss/themes']
     }))
     .pipe(prefixer('last 2 versions', 'ie 9'))
     .pipe(gulp.dest('./css'))
@@ -25,7 +26,7 @@ gulp.task('default', function() {
   gulp.run('sass');
 
   // Watch files and run tasks if they change
-  gulp.watch('./scss/styleselect.scss', function(event) {
+  gulp.watch('./scss/**/*.*', function(event) {
     gulp.run('sass');
   });
 
