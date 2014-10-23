@@ -32,6 +32,8 @@ define(function() {
 		select.setAttribute('data-ss-uuid', uuid);
 
 		// Build styled clones of all the real options
+		var selectedOptionHTML;
+		var optionsHTML = '<ul class="">';
 		options.forEach(function(option, index){
 			var text = option.innerText,
 				attr = option.attributes,
@@ -39,16 +41,13 @@ define(function() {
 
 			if (index === selectedIndex) {
 				// Start list, and mark first item as selected-option - this is where we store state for the styled select box
-				styleSelectHTML += ''+
-					'<div class="ss-selected-option" data-value="' + val + '">' + text + '</div>' +
-					'<ul class="">' +
-						'<li class="ss-option" data-value="' + val + '">' + text + '</li>';
-			} else {
-				// Continue list
-				styleSelectHTML += '<li class="ss-option" data-value="' + val + '">' + text + '</li>';
+				selectedOptionHTML = '<div class="ss-selected-option" data-value="' + val + '">' + text + '</div>'
 			}
+			// Continue list
+			optionsHTML += '<li class="ss-option" data-value="' + val + '">' + text + '</li>';
 		})
-		styleSelectHTML += '</ul></div>';
+		optionsHTML += '</ul>';
+		styleSelectHTML += selectedOptionHTML += optionsHTML += '</div>';
 		select.insertAdjacentHTML('afterend', styleSelectHTML);
 
 		// Change real select box when a styled option is clicked
