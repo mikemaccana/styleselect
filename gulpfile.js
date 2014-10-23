@@ -11,7 +11,7 @@ var path = require('path');
 
 gulp.task('sass', function () {
   gulp
-    .src('./scss/style.scss')
+    .src('./scss/styleselect.scss')
     .pipe(sass({
       paths: ['scss']
     }))
@@ -25,7 +25,7 @@ gulp.task('default', function() {
   gulp.run('sass');
 
   // Watch files and run tasks if they change
-  gulp.watch('./scss/*.scss', function(event) {
+  gulp.watch('./scss/styleselect.scss', function(event) {
     gulp.run('sass');
   });
 
