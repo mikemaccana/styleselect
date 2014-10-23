@@ -27,13 +27,13 @@ define(function() {
 			options = select.children,
 			selectedIndex = select.selectedIndex
 			uuid = makeUUID(),
-			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
+			styleSelectHTML = '<div class="style-select selectizish" data-ss-uuid="' + uuid + '">';
 
 		select.setAttribute('data-ss-uuid', uuid);
 
 		// Build styled clones of all the real options
 		var selectedOptionHTML;
-		var optionsHTML = '<ul class="">';
+		var optionsHTML = '<div class="ss-dropdown">';
 		options.forEach(function(option, index){
 			var text = option.innerText,
 				attr = option.attributes,
@@ -44,14 +44,14 @@ define(function() {
 				selectedOptionHTML = '<div class="ss-selected-option" data-value="' + val + '">' + text + '</div>'
 			}
 			// Continue list
-			optionsHTML += '<li class="ss-option" data-value="' + val + '">' + text + '</li>';
+			optionsHTML += '<div class="ss-option" data-value="' + val + '">' + text + '</div>';
 		})
-		optionsHTML += '</ul>';
+		optionsHTML += '</div>';
 		styleSelectHTML += selectedOptionHTML += optionsHTML += '</div>';
 		select.insertAdjacentHTML('afterend', styleSelectHTML);
 
 		// Change real select box when a styled option is clicked
-		var styleSelectOptions = queryAll('[data-ss-uuid='+uuid+'] li');
+		var styleSelectOptions = queryAll('[data-ss-uuid='+uuid+'] .ss-option');
 		styleSelectOptions.forEach(function(unused, index){
 
 			var styleSelectOption = styleSelectOptions.item(index);
@@ -77,7 +77,7 @@ define(function() {
 			});
 		})
 
-		// When the current option is selected,
+		// When the current option is selected
 		query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option').addEventListener('click', function(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();

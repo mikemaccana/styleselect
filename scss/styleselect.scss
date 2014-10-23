@@ -17,11 +17,10 @@ select[data-ss-uuid] {
 		display: block;
 	}
 
-	ul {
+	.ss-dropdown {
 		top: 0;
 		left: 0;
 		position: absolute;
-		list-style-type: none;
 		float: left;
 		width: 100%;
 		display: none;
@@ -31,17 +30,16 @@ select[data-ss-uuid] {
 		.ss-selected-option {
 			display: none;
 		}
-		ul {
+		.ss-dropdown {
 			display: block;
 		}
 	}
 
-	li,
+	.ss-dropdown .ss-option,
 	div {
 		color: black;
 		font-weight: 300;
 		cursor: pointer;
-		list-style-type: none;
 		display: block;
 		clear: both;
 		width: 100%;
