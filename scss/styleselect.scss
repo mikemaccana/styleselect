@@ -70,6 +70,7 @@ select[data-ss-uuid] {
 			}
 			&.ticked::before {
 				content: "✓";
+				padding-right: 3px;
 			}
 		}
 	}
