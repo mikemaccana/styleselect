@@ -17,7 +17,8 @@ define(function() {
 	var KEYCODES = {
 		SPACE: 32,
 		UP: 38,
-		DOWN: 40
+		DOWN: 40,
+		ENTER: 13
 	}
 
 	// Return true if any ancestor matches selector
@@ -85,6 +86,30 @@ define(function() {
 
 		var styleSelectOptions = queryAll('[data-ss-uuid='+uuid+'] .ss-option');
 
+		var changeRealSelectBox = function(newValue, newLabel) {
+			// Set style select to show correct value
+			var selectedOption = query('.style-select[data-ss-uuid="' + uuid +'"] .ss-selected-option')
+			selectedOption.innerText = newLabel;
+			selectedOption.dataset.value = newValue;
+			selectedOption.parentNode.classList.remove('open');
+
+			// Update the 'tick' that shows the option with the current value
+			styleSelectOptions.forEach(function(styleSelectOption){
+				if ( styleSelectOption.dataset.value === newValue) {
+					styleSelectOption.classList.add('ticked')
+				} else {
+					styleSelectOption.classList.remove('ticked')
+				}
+			})
+
+			// Update real select box
+			realSelect.value = newValue;
+
+			// Send 'change' event to real select - to trigger any change event listeners
+			var changeEvent = new Event('change');
+			realSelect.dispatchEvent(changeEvent);
+		}
+
 		// Change real select box when a styled option is clicked
 		styleSelectOptions.forEach(function(unused, index){
 
@@ -93,29 +118,11 @@ define(function() {
 				var target = ev.target,
 					styledSelectBox = target.parentNode.parentNode,
 					uuid = styledSelectBox.getAttribute('data-ss-uuid'),
-					newValue = target.getAttribute('data-value');
+					newValue = target.getAttribute('data-value'),
+					newLabel = target.innerText;
 
-				// Set style select to show correct value
-				var selectedOption = query('.style-select[data-ss-uuid="' + uuid +'"] .ss-selected-option')
-				selectedOption.innerText = target.innerText;
-				selectedOption.dataset.value = newValue;
-				styledSelectBox.classList.remove('open');
+				changeRealSelectBox(newValue, newLabel)
 
-				// Update the 'tick' that shows the option with the current value
-				styleSelectOptions.forEach(function(styleSelectOption){
-					if ( styleSelectOption.dataset.value === newValue) {
-						styleSelectOption.classList.add('ticked')
-					} else {
-						styleSelectOption.classList.remove('ticked')
-					}
-				})
-
-				// Update real select box
-				realSelect.value = newValue;
-
-				// Send 'change' event to real select - to trigger any change event listeners
-				var changeEvent = new Event('change');
-				realSelect.dispatchEvent(changeEvent);
 			});
 
 			// Tick and highlight the option that's currently in use
@@ -193,7 +200,7 @@ define(function() {
 							highlightedOptionIndex = highlightedOptionIndex + 1
 						}
 					}
-					styledSelectedOption.parentNode.querySelectorAll('.ss-option').forEach(function(option, index){
+					styleSelectOptions.forEach(function(option, index){
 						if ( index === highlightedOptionIndex ) {
 							option.classList.add('highlighted')
 						} else {
@@ -201,6 +208,17 @@ define(function() {
 						}
 					})
 				}
+				ev.preventDefault();
+				ev.stopPropagation();
+			}
+
+			// User has picked an item from the keyboard
+			if ( ev.keyCode === KEYCODES.ENTER ) {
+				var highlightedOption = styledSelectedOption.parentNode.querySelectorAll('.ss-option')[highlightedOptionIndex],
+					newValue = highlightedOption.dataset.value,
+					newLabel = highlightedOption.innerText
+
+				changeRealSelectBox(newValue, newLabel)
 				ev.preventDefault();
 				ev.stopPropagation();
 			}
