@@ -46,6 +46,8 @@ select[data-ss-uuid] {
       background-color: white; }
       .style-select .ss-dropdown .ss-option:hover {
         background-color: #f2f4f8; }
+      .style-select .ss-dropdown .ss-option.ticked::before {
+        content: "✓"; }
   .style-select.open .ss-dropdown {
     display: block; }
   .style-select.open .ss-selected-option::after {

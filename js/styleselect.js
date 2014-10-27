@@ -94,6 +94,15 @@ define(function() {
 				selectedOption.dataset.value = newValue;
 				styledSelectBox.classList.remove('open');
 
+				// Update the 'ticked' option
+				styleSelectOptions.forEach(function(styleSelectOption){
+					if ( styleSelectOption === newValue) {
+						styleSelectOption.classList.add('ticked')
+					} else {
+						styleSelectOption.classList.remove('ticked')
+					}
+				})
+
 				// Update real select box
 				var realSelect = query('select[data-ss-uuid="' + uuid + '"]')
 				realSelect.value = newValue;
@@ -102,6 +111,11 @@ define(function() {
 				var changeEvent = new Event('change');
 				realSelect.dispatchEvent(changeEvent);
 			});
+
+			// Show a tick beside the option that's currently in use
+			if ( styleSelectOption.dataset.value === select.value ) {
+				styleSelectOption.classList.add('ticked')
+			}
 		})
 
 		var closeAllStyleSelects = function(exception){

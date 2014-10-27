@@ -68,6 +68,9 @@ select[data-ss-uuid] {
 			&:hover {
 				background-color: $highlight-color;
 			}
+			&.ticked::before {
+				content: "✓";
+			}
 		}
 	}
 
