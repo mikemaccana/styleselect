@@ -180,12 +180,12 @@ define(function() {
 			var styledSelectBox = ev.target.parentNode
 
 			switch (ev.keyCode) {
-			  case KEYCODES.SPACE:
-			    // Space shows and hides styles select boxes
-			    toggleStyledSelect(styledSelectBox);
-			    break;
-			  case KEYCODES.DOWN:
-			  case KEYCODES.UP:
+				case KEYCODES.SPACE:
+					// Space shows and hides styles select boxes
+					toggleStyledSelect(styledSelectBox);
+					break;
+				case KEYCODES.DOWN:
+				case KEYCODES.UP:
 					// Move the highlight up and down
 					if ( ! styledSelectBox.classList.contains('open') ) {
 						// If style select is not open, up/down should open it.
