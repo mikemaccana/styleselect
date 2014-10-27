@@ -46,7 +46,7 @@ define(function() {
 			options = select.children,
 			selectedIndex = select.selectedIndex
 			uuid = makeUUID(),
-			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
+			styleSelectHTML = '<div class="style-select" tabindex="0" data-ss-uuid="' + uuid + '">';
 
 		select.setAttribute('data-ss-uuid', uuid);
 
