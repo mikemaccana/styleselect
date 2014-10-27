@@ -96,7 +96,7 @@ define(function() {
 
 				// Update the 'ticked' option
 				styleSelectOptions.forEach(function(styleSelectOption){
-					if ( styleSelectOption === newValue) {
+					if ( styleSelectOption.dataset.value === newValue) {
 						styleSelectOption.classList.add('ticked')
 					} else {
 						styleSelectOption.classList.remove('ticked')
