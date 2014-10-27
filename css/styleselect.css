@@ -31,7 +31,7 @@ select[data-ss-uuid] {
       right: 12px;
       display: block; }
   .style-select .ss-dropdown {
-    top: 33px;
+    top: 32px;
     left: 0;
     position: absolute;
     float: left;

@@ -52,7 +52,7 @@ select[data-ss-uuid] {
 	}
 
 	.ss-dropdown {
-		top: $line-height + (2 * $spacing-tiny) + (2 * $border-width);
+		top: $line-height + 2 * $spacing-tiny + $border-width;
 		left: 0;
 		position: absolute;
 		float: left;
