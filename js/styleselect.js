@@ -24,19 +24,19 @@ define(function() {
 	// Return true if any ancestor matches selector
 	// Borrowed from ancestorMatches() from agave.js (MIT)
 	var isAncestorOf = function(element, selector, includeSelf) {
-	  var parent = element.parentNode;
-	  if ( includeSelf && element.matches(selector) ) {
+		var parent = element.parentNode;
+		if ( includeSelf && element.matches(selector) ) {
 			return true
-	  }
-	  // While parents are 'element' type nodes
-	  // See https://developer.mozilla.org/en-US/docs/DOM/Node.nodeType
-	  while ( parent && parent.nodeType && parent.nodeType === 1 ) {
-		  if ( parent.matches(selector) ) {
+		}
+		// While parents are 'element' type nodes
+		// See https://developer.mozilla.org/en-US/docs/DOM/Node.nodeType
+		while ( parent && parent.nodeType && parent.nodeType === 1 ) {
+			if ( parent.matches(selector) ) {
 				return true
-		  }
+			}
 			parent = parent.parentNode;
-	  }
-	  return false;
+		}
+		return false;
 	};
 
 
