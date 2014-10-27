@@ -1,13 +1,17 @@
 $line-height: 19px;
 $border-width: 1px;
 $spacing: 24px;
+
 $highlight-color: rgb(242, 244, 248);
+$selected-option-background: linear-gradient(to bottom, #fefefe, #f2f2f2);
+$dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+$standard-border: $border-width solid #d0d0d0;
 
 $spacing-small: $spacing / 2;
 $spacing-tiny: $spacing / 4;
 
-
-
+// Hide real select boxes which have seen styled.
 select[data-ss-uuid] {
 	display: none;
 	pointer-events: none;
@@ -16,7 +20,6 @@ select[data-ss-uuid] {
 .style-select {
 	display: block;
 	position: relative;
-	float: left;
 	width: 140px; // Default width
 
 	// Set reasonable defaults on this element and its children
@@ -33,11 +36,11 @@ select[data-ss-uuid] {
 
 	.ss-selected-option {
 		width: 100%;
-		background-image: linear-gradient(to bottom, #fefefe, #f2f2f2) !important;
+		background-image: $selected-option-background;
 		border-radius: 2px;
 		border-color: #b8b8b8;
 		padding: $spacing-tiny;
-		border: $border-width solid #d0d0d0;
+		border: $standard-border;
 		// The down arrow
 		&::after {
 			content: "▾";
@@ -55,12 +58,13 @@ select[data-ss-uuid] {
 		float: left;
 		width: 100%;
 		display: none;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-		border: $border-width solid #d0d0d0;
+		box-shadow: $dropdown-shadow;
+		border: $standard-border;
 		border-top: 0 none;
 		.ss-option {
 			width: 100%;
 			padding: $spacing-tiny;
+			background-color: white;
 			&:hover {
 				background-color: $highlight-color;
 			}

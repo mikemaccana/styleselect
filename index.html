@@ -5,21 +5,56 @@
     <title>Style select demo</title>
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/styleselect.css">
-
+    <link rel="stylesheet" href="css/main.css">
+    <script src='http://cdn.ractivejs.org/latest/ractive.js'></script>
   </head>
 
-  <body style="font-family: Lato, sans-serif">
-    <h1>Style select demo</h1>
+  <body>
+    <img src="/images/styleselect.png" alt="Style select"/>
 
-    <p>Simple, standalone styling for select boxes in modern browsers.</p>
+    <h1>Styling for select boxes. No jQuery!</h1>
 
-    <p><strong>Open your JavaScript console.<strong></p>
+    <ul>
+      <li><strong>Standalone</strong> - runs on its own without any dependencies. If you're using vanilla JS and want to style a select box, you've come to the right place.</li>
+      <li><strong>Correct</strong> - Triggers 'change' events on real select boxes so you won't have to modify your existing event listeners.</li>
+      <li><strong>Stylable</strong> - designed for easy incorporation into your own look and feel. SCSS, free of magic numbers, CSS 'triangles', images, and other hacks. </li>
+    </ul>
+
+    <p>StyleSelect was made when looking for a modern equivalent of <a href="http://harvesthq.github.io/chosen">Chosen</a> and <a href="http://brianreavis.github.io/selectize.js/">Selectize</a> for a project where jQuery wasn't used.<p>
+
+    <p>There are a number of <a href="http://lea.verou.me/2011/03/custom-select-drop-downs-with-css3/">CSS-only ways to style a select box</a>, but they don't style the drop down options, just the current selection. <strong>StyleSelect styles everything</strong>.</p>
+
+    <h2>Demo</h2>
+
+    <p>So we've included `styleselect.scss` in our SASS and loaded the AMD module. To style a select box, just run `styleSelect` with a CSS-style selector:</p>
+
+    <code>styleSelect('select');</code>
+
+    <p>That's all. Here's one we just made: </p>
 
     <select name="select">
       <option value="value1">Value 1</option>
       <option value="value2" selected>Value 2</option>
       <option value="value3">Value 3</option>
     </select>
+
+    <p class="result"></p>
+
+    <p>From then on you'll probably want to tweak styling.</a>
+
+    <h2>Get StyleSelect</h2>
+
+    <a class="download" href="https://github.com/mikemaccana/styleselect/archive/master.zip" download="styleselect.zip">Download</a>
+
+    <h2>Feature Additions and Pull Requests</h2>
+
+    <p>There's a bunch of useful features I'd like in StyleSelect, to please feel free to add them!</p>
+
+    <h2>Author and Credits</h2>
+
+    <p>Style Select is by <a href="http://twitter.com/mikemaccana">Mike</a>.</p>
+
+    <p>Style Select began as a fork of <a href="https://github.com/LeslieOA/VisualSelect">VisualSelect</a> - Style Select adds significant bugfixes, entirely new SASS, and docs, the license has also been changed from WTFPL to the MIT license.<p>
 
     <script src="js/require.js" data-main="js/main"></script>
   </body>

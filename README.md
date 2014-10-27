@@ -3,8 +3,9 @@
 Simple, standalone styling for select boxes in modern browsers.
 
  - **Does not require jQuery**, or any other dependencies.
- - Written in SCSS for easy incorporation in your own code base.
+ - Designed to be hackable - no magic numbers, all variables exposed by SCSS variables for easy incoporation into your own look and feel.
  - Minimal out of the box styling, so you won't have to override anything.
+ - Free of hacks - no CSS 'triangles'
  - Triggers 'change' events on real select boxes so you won't have to change event listeners.
 
 ## Demo
@@ -37,4 +38,4 @@ That's all. From then on you'll probably want to tweak styling.
 
 Style Select is based on [VisualSelect](https://github.com/LeslieOA/VisualSelect), created for Multplx Attract platform.
 
-Style select adds standalone functionality, lots of bugfixes, docs and a demo, the license has also been changed from WTFPL to the MIT license.
+Style Select adds lots of bugfixes, new SASS, docs and a demo, the license has also been changed from WTFPL to the MIT license.

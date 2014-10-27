@@ -13,8 +13,15 @@ gulp.task('sass', function () {
   gulp
     .src('./scss/styleselect.scss')
     .pipe(sass({
-      paths: ['scss'],
-      includePaths: ['./scss/themes']
+      paths: ['scss']
+    }))
+    .pipe(prefixer('last 2 versions', 'ie 9'))
+    .pipe(gulp.dest('./css'))
+    .pipe( connect.reload() );
+  gulp
+    .src('./scss/main.scss')
+    .pipe(sass({
+      paths: ['scss']
     }))
     .pipe(prefixer('last 2 versions', 'ie 9'))
     .pipe(gulp.dest('./css'))

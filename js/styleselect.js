@@ -27,7 +27,7 @@ define(function() {
 			options = select.children,
 			selectedIndex = select.selectedIndex
 			uuid = makeUUID(),
-			styleSelectHTML = '<div class="style-select selectizish" data-ss-uuid="' + uuid + '">';
+			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
 
 		select.setAttribute('data-ss-uuid', uuid);
 
@@ -40,10 +40,10 @@ define(function() {
 				val = option.getAttribute('value') ? option.getAttribute('value') : '' ;
 
 			if (index === selectedIndex) {
-				// Start list, and mark first item as selected-option - this is where we store state for the styled select box
+				// Mark first item as selected-option - this is where we store state for the styled select box
 				selectedOptionHTML = '<div class="ss-selected-option" data-value="' + val + '">' + text + '</div>'
 			}
-			// Continue list
+			// Continue building optionsHTML
 			optionsHTML += '<div class="ss-option" data-value="' + val + '">' + text + '</div>';
 		})
 		optionsHTML += '</div>';
@@ -77,18 +77,21 @@ define(function() {
 			});
 		})
 
-		// When the current option is selected
+		// When a styled select box is clicked
 		query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option').addEventListener('click', function(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			// Close all Style Selects (eg, other style selects on the page)
-			queryAll('.style-select').forEach(function(styleSelectEl) {
-				styleSelectEl.classList.remove('open');
-			});
+			var selectBox = ev.target.parentNode;
 
-			var target = ev.target;
-			target.parentNode.classList.add('open');
+			if ( ! selectBox.classList.contains('open') ) {
+				// If we're closed and about to open, close all Style Selects (eg, other style selects on the page)
+				queryAll('.style-select').forEach(function(styleSelectEl) {
+					styleSelectEl.classList.remove('open');
+				});
+			}
+			// Then toggle open/close
+			selectBox.classList.toggle('open');
 
 		});
 

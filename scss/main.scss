@@ -1,0 +1,32 @@
+$dark-blue: rgb(0, 0, 72);
+
+body {
+    margin: 24px auto;
+    max-width: 720px;
+    font-family: 'Open Sans', Helvetica, arial, sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 300;
+    color: #444B58;
+    background: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+    font-weight: 300;
+    text-align: center;
+}
+
+.download {
+    width: 128px;
+    display: block;
+    margin: 0 auto;
+    background-color: $dark-blue;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 16pt;
+}
