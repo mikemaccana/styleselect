@@ -55,7 +55,7 @@ define(function() {
 	return function(selector) {
 		var realSelect = query(selector),
 			realOptions = realSelect.children,
-			selectedIndex = realSelect.selectedIndex
+			selectedIndex = realSelect.selectedIndex,
 			uuid = makeUUID(),
 			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
 
