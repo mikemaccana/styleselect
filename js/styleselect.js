@@ -17,6 +17,10 @@ define(function() {
 			Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.webkitMatchesSelector || Element.prototype.oMatchesSelector
 		}
 
+		var KEYCODES = {
+			SPACE: 32
+		}
+
 
 		// Return true if any ancestor matches selector
 		// Borrowed from ancestorMatches() from agave.js (MIT)
@@ -50,7 +54,7 @@ define(function() {
 			options = select.children,
 			selectedIndex = select.selectedIndex
 			uuid = makeUUID(),
-			styleSelectHTML = '<div class="style-select" tabindex="0" data-ss-uuid="' + uuid + '">';
+			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
 
 		select.setAttribute('data-ss-uuid', uuid);
 
@@ -63,7 +67,7 @@ define(function() {
 
 			if (index === selectedIndex) {
 				// Mark first item as selected-option - this is where we store state for the styled select box
-				selectedOptionHTML = '<div class="ss-selected-option" data-value="' + val + '">' + text + '</div>'
+				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" data-value="' + val + '">' + text + '</div>'
 			}
 			// Continue building optionsHTML
 			optionsHTML += '<div class="ss-option" data-value="' + val + '">' + text + '</div>';
@@ -105,19 +109,26 @@ define(function() {
 			});
 		}
 
-		// When a styled select box is clicked
-		query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option').addEventListener('click', function(ev) {
-			ev.preventDefault();
-			ev.stopPropagation();
-
-			var selectBox = ev.target.parentNode;
-
-			if ( ! selectBox.classList.contains('open') ) {
+		var toggleStyledSelect = function(styledSelectBox){
+			if ( ! styledSelectBox.classList.contains('open') ) {
 				// If we're closed and about to open, close all Style Selects (eg, other style selects on the page)
 				closeAllStyleSelects();
 			}
 			// Then toggle open/close
-			selectBox.classList.toggle('open');
+			styledSelectBox.classList.toggle('open');
+		}
+
+		// When a styled select box is clicked
+		var styledSelectedOption = query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option')
+		styledSelectedOption.addEventListener('click', function(ev) {
+			ev.preventDefault();
+			ev.stopPropagation();
+			toggleStyledSelect(ev.target.parentNode);
+		});
+		styledSelectedOption.addEventListener('keydown', function(ev) {
+			if ( ev.keyCode === KEYCODES.SPACE ) {
+				toggleStyledSelect(ev.target.parentNode);
+			}
 		});
 
 		// Clicking outside of the styled select box closes any open styled select boxes
