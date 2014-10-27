@@ -14,27 +14,22 @@ define(function() {
 		}
 
 
-		// Return count of ancestor elements macthing a selector
-		// Borrowed from agave.js (MIT)
-		var ancestorMatches = function(element, selector, includeSelf) {
-		  var ancestors = [];
+		// Return true if any ancestor matches selector
+		// Borrowed from ancestorMatches() from agave.js (MIT)
+		var isAncestorOf = function(element, selector, includeSelf) {
 		  var parent = element.parentNode;
 		  if ( includeSelf && element.matches(selector) ) {
-				ancestors.push(element);
+				return true
 		  }
 		  // While parents are 'element' type nodes
 		  // See https://developer.mozilla.org/en-US/docs/DOM/Node.nodeType
 		  while ( parent && parent.nodeType && parent.nodeType === 1 ) {
-				if ( selector ) {
-				  if ( parent.matches(selector) ) {
-						ancestors.push(parent);
-				  }
-				} else {
-				  ancestors.push(parent);
-				}
+			  if ( parent.matches(selector) ) {
+					return true
+			  }
 				parent = parent.parentNode;
 		  }
-		  return ancestors;
+		  return false;
 		};
 
 
@@ -123,8 +118,7 @@ define(function() {
 
 		// Clicking outside of the styled select box closes any open styled select boxes
 		query('body').addEventListener('click', function(ev){
-			var parentSelectElements = ancestorMatches(ev.target, '.style-select', false).length;
-			if ( ! parentSelectElements.length ) {
+			if ( ! isAncestorOf(ev.target, '.style-select', true) ) {
 				closeAllStyleSelects();
 			}
 		})
