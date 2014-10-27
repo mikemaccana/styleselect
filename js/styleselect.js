@@ -69,7 +69,7 @@ define(function() {
 			realOptions = realSelect.children,
 			selectedIndex = realSelect.selectedIndex,
 			uuid = makeUUID(),
-			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
+			styleSelectHTML = '<div class="style-select" aria-hidden="true" data-ss-uuid="' + uuid + '">';
 
 		// The index of the item that's being highlighted by the mouse or keyboard
 		var highlightedOptionIndex;
@@ -91,7 +91,7 @@ define(function() {
 			if (index === selectedIndex) {
 				// Mark first item as selected-option - this is where we store state for the styled select box
 				// aria-hidden=true so screen readers ignore the styles selext box in favor of the real one (which is visible by default)
-				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" aria-hidden="true" data-value="' + value + '">' + text + '</div>'
+				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" data-value="' + value + '">' + text + '</div>'
 			}
 			// Continue building optionsHTML
 			optionsHTML += '<div class="ss-option" data-value="' + value + '">' + text + '</div>';
