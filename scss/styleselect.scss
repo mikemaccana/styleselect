@@ -1,4 +1,10 @@
-@import 'selectizish';
+$line-height: 19px;
+$border-width: 1px;
+$spacing: 24px;
+$spacing-small: $spacing / 2;
+$spacing-tiny: $spacing / 4;
+
+$highlight-color: rgb(242, 244, 248);
 
 select[data-ss-uuid] {
 	display: none;
@@ -9,50 +15,63 @@ select[data-ss-uuid] {
 	display: block;
 	position: relative;
 	float: left;
-	font-weight: 200;
-	text-align: left;
+
 	width: 140px; // Default width
 
+	// Set reasonable defaults on this element and its children
 	&, * {
 		padding: 0;
 		margin: 0;
-		display: block;
+		box-sizing: border-box;
+		text-align: left;
+		line-height: $line-height;
+		color: black;
+		font-weight: 300;
+		cursor: pointer;
+	}
+
+	.ss-selected-option {
+		width: 100%;
+			background-image: linear-gradient(to bottom, #fefefe, #f2f2f2) !important;
+			border-radius: 2px;
+			border-color: #b8b8b8;
+			padding: $spacing-tiny;
+			border: $border-width solid #d0d0d0;
+			// The down arrow
+			&::after {
+				content: "▾";
+				position: absolute;
+				top: $spacing-tiny;
+				right: $spacing-small;
+				display: block;
+			}
 	}
 
 	.ss-dropdown {
-		top: 0;
+		top: $line-height + (2 * $spacing-tiny) + (2 * $border-width);
 		left: 0;
 		position: absolute;
 		float: left;
 		width: 100%;
 		display: none;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+			border: $border-width solid #d0d0d0;
+			border-top: 0 none;
+			.ss-option {
+				width: 100%;
+					padding: $spacing-tiny;
+					&:hover {
+				background-color: $highlight-color;
+			}
+		 }
 	}
 
 	&.open {
-		.ss-selected-option {
-			display: none;
-		}
 		.ss-dropdown {
 			display: block;
 		}
-	}
-
-	.ss-dropdown .ss-option,
-	div {
-		color: black;
-		font-weight: 300;
-		cursor: pointer;
-		display: block;
-		clear: both;
-		width: 100%;
-		float: left;
-		&:hover {
-		}
-	}
-
-	div {
-		position: relative;
-		&:hover {
+		.ss-selected-option::after {
+			content: "▴";
 		}
 	}
 
