@@ -1,4 +1,4 @@
-define(['styleSelect'], function(styleSelect){
+define(['styleselect'], function(styleSelect){
   var log = console.log.bind(console);
 
   styleSelect('select');
