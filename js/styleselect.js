@@ -5,6 +5,7 @@ define(function() {
 		// Quick aliases and polyfills if needed
 		var query = document.querySelector.bind(document);
 		var queryAll = document.querySelectorAll.bind(document);
+		var log = console.log.bind(console);
 		if ( ! NodeList.prototype.forEach ) {
 			NodeList.prototype.forEach = Array.prototype.forEach;
 		}
@@ -12,7 +13,30 @@ define(function() {
 			HTMLCollection.prototype.forEach = Array.prototype.forEach;
 		}
 
-		var log = console.log.bind(console)
+
+		// Return count of ancestor elements macthing a selector
+		// Borrowed from agave.js (MIT)
+		var ancestorMatches = function(element, selector, includeSelf) {
+		  var ancestors = [];
+		  var parent = element.parentNode;
+		  if ( includeSelf && element.matches(selector) ) {
+				ancestors.push(element);
+		  }
+		  // While parents are 'element' type nodes
+		  // See https://developer.mozilla.org/en-US/docs/DOM/Node.nodeType
+		  while ( parent && parent.nodeType && parent.nodeType === 1 ) {
+				if ( selector ) {
+				  if ( parent.matches(selector) ) {
+						ancestors.push(parent);
+				  }
+				} else {
+				  ancestors.push(parent);
+				}
+				parent = parent.parentNode;
+		  }
+		  return ancestors;
+		};
+
 
 		// Used to match select boxes to their style select partners
 		var makeUUID = function(){
@@ -76,6 +100,12 @@ define(function() {
 			});
 		})
 
+		var closeAllStyleSelects = function(){
+			queryAll('.style-select').forEach(function(styleSelectEl) {
+				styleSelectEl.classList.remove('open');
+			});
+		}
+
 		// When a styled select box is clicked
 		query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option').addEventListener('click', function(ev) {
 			ev.preventDefault();
@@ -85,14 +115,19 @@ define(function() {
 
 			if ( ! selectBox.classList.contains('open') ) {
 				// If we're closed and about to open, close all Style Selects (eg, other style selects on the page)
-				queryAll('.style-select').forEach(function(styleSelectEl) {
-					styleSelectEl.classList.remove('open');
-				});
+				closeAllStyleSelects();
 			}
 			// Then toggle open/close
 			selectBox.classList.toggle('open');
-
 		});
+
+		// Clicking outside of the styled select box closes any open styled select boxes
+		query('body').addEventListener('click', function(ev){
+			var parentSelectElements = ancestorMatches(ev.target, '.style-select', false).length;
+			if ( ! parentSelectElements.length ) {
+				closeAllStyleSelects();
+			}
+		})
 
 	};
 
