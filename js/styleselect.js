@@ -52,7 +52,6 @@ define(function() {
 	// The 'styleSelect' main function
 	// selector:String - CSS selector for the select box to style
 	return function(selector) {
-
 		var realSelect = query(selector),
 			realOptions = realSelect.children,
 			selectedIndex = realSelect.selectedIndex
@@ -116,8 +115,20 @@ define(function() {
 
 			// Show a tick beside the option that's currently in use
 			if ( styleSelectOption.dataset.value === realSelect.value ) {
-				styleSelectOption.classList.add('ticked')
+				styleSelectOption.classList.add('ticked');
+				styleSelectOption.classList.add('highlighted')
 			}
+
+			// Important: we can't use ':hover' as the keyboard and default value can also set the highlight
+			styleSelectOption.addEventListener('mouseover', function(ev){
+				styleSelectOption.parentNode.childNodes.forEach(function(sibling){
+					if ( sibling === ev.target ) {
+						sibling.classList.add('highlighted')
+					} else {
+						sibling.classList.remove('highlighted')
+					}
+				})
+			})
 		})
 
 		var closeAllStyleSelects = function(exception){

@@ -65,7 +65,9 @@ select[data-ss-uuid] {
 			width: 100%;
 			padding: $spacing-tiny;
 			background-color: white;
-			&:hover {
+			// We don't use :hover as that's only for mouse
+			// and we want keyboard highlighting too
+			&.highlighted {
 				background-color: $highlight-color;
 			}
 			&.ticked::before {

@@ -44,7 +44,7 @@ select[data-ss-uuid] {
       width: 100%;
       padding: 6px;
       background-color: white; }
-      .style-select .ss-dropdown .ss-option:hover {
+      .style-select .ss-dropdown .ss-option.highlighted {
         background-color: #f2f4f8; }
       .style-select .ss-dropdown .ss-option.ticked::before {
         content: "✓";
