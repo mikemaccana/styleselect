@@ -48,34 +48,37 @@ define(function() {
 		return UUID
 	}
 
-	// Selector String - CSS selector for a single style select box
-	var styleSelect = function(selector) {
 
-		var select = query(selector),
-			options = select.children,
-			selectedIndex = select.selectedIndex
+	// The 'styleSelect' main function
+	// selector:String - CSS selector for the select box to style
+	return function(selector) {
+
+		var realSelect = query(selector),
+			realOptions = realSelect.children,
+			selectedIndex = realSelect.selectedIndex
 			uuid = makeUUID(),
 			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
 
-		select.setAttribute('data-ss-uuid', uuid);
+		realSelect.setAttribute('data-ss-uuid', uuid);
 
 		// Build styled clones of all the real options
 		var selectedOptionHTML;
 		var optionsHTML = '<div class="ss-dropdown">';
-		options.forEach(function(option, index){
-			var text = option.innerText,
-				val = option.getAttribute('value') ? option.getAttribute('value') : '' ;
+		realOptions.forEach(function(realOption, index){
+			var text = realOption.innerText,
+				value = realOption.getAttribute('value') || '' ;
 
 			if (index === selectedIndex) {
 				// Mark first item as selected-option - this is where we store state for the styled select box
-				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" data-value="' + val + '">' + text + '</div>'
+				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" data-value="' + value + '">' + text + '</div>'
 			}
 			// Continue building optionsHTML
-			optionsHTML += '<div class="ss-option" data-value="' + val + '">' + text + '</div>';
+			optionsHTML += '<div class="ss-option" data-value="' + value + '">' + text + '</div>';
 		})
 		optionsHTML += '</div>';
 		styleSelectHTML += selectedOptionHTML += optionsHTML += '</div>';
-		select.insertAdjacentHTML('afterend', styleSelectHTML);
+		// And add out styled select just after the real select
+		realSelect.insertAdjacentHTML('afterend', styleSelectHTML);
 
 		// Change real select box when a styled option is clicked
 		var styleSelectOptions = queryAll('[data-ss-uuid='+uuid+'] .ss-option');
@@ -94,7 +97,7 @@ define(function() {
 				selectedOption.dataset.value = newValue;
 				styledSelectBox.classList.remove('open');
 
-				// Update the 'ticked' option
+				// Update the 'tick' that shows the option with the current value
 				styleSelectOptions.forEach(function(styleSelectOption){
 					if ( styleSelectOption.dataset.value === newValue) {
 						styleSelectOption.classList.add('ticked')
@@ -104,7 +107,6 @@ define(function() {
 				})
 
 				// Update real select box
-				var realSelect = query('select[data-ss-uuid="' + uuid + '"]')
 				realSelect.value = newValue;
 
 				// Send 'change' event to real select - to trigger any change event listeners
@@ -113,7 +115,7 @@ define(function() {
 			});
 
 			// Show a tick beside the option that's currently in use
-			if ( styleSelectOption.dataset.value === select.value ) {
+			if ( styleSelectOption.dataset.value === realSelect.value ) {
 				styleSelectOption.classList.add('ticked')
 			}
 		})
@@ -163,7 +165,5 @@ define(function() {
 		})
 
 	};
-
-	return styleSelect
 });
 
