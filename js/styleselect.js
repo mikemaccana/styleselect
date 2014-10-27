@@ -36,7 +36,6 @@ define(function() {
 		var optionsHTML = '<div class="ss-dropdown">';
 		options.forEach(function(option, index){
 			var text = option.innerText,
-				attr = option.attributes,
 				val = option.getAttribute('value') ? option.getAttribute('value') : '' ;
 
 			if (index === selectedIndex) {
