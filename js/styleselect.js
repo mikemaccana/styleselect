@@ -97,7 +97,7 @@ define(function() {
 				var realSelect = query('select[data-ss-uuid="' + uuid + '"]')
 				realSelect.value = newValue;
 
-				// Send 'click' event to real select - to trigger any change events
+				// Send 'change' event to real select - to trigger any change event listeners
 				var changeEvent = new Event('change');
 				realSelect.dispatchEvent(changeEvent);
 			});
