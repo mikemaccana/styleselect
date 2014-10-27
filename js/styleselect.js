@@ -175,52 +175,52 @@ define(function() {
 		// Keyboard handling
 		styledSelectedOption.addEventListener('keydown', function(ev) {
 			var styledSelectBox = ev.target.parentNode
-			// Space shows and hides styles select boxes
-			if ( ev.keyCode === KEYCODES.SPACE ) {
-				toggleStyledSelect(styledSelectBox);
-			}
 
-			// Move the highlight up and down
-			if ( ev.keyCode === KEYCODES.DOWN || ev.keyCode === KEYCODES.UP ) {
-				if ( ! styledSelectBox.classList.contains('open') ) {
-					// If style select is not open, up/down should open it.
-					toggleStyledSelect(styledSelectBox);
-				} else {
-					// If style select is already open, these should change what the highlighted option is
-					if ( ev.keyCode === KEYCODES.UP ) {
-						// Go up
-						if ( highlightedOptionIndex !== 0 ) {
-							log('up arrow from', highlightedOptionIndex, 'to', highlightedOptionIndex - 1)
-							highlightedOptionIndex = highlightedOptionIndex - 1
-						}
+			switch (ev.keyCode) {
+			  case KEYCODES.SPACE:
+			    // Space shows and hides styles select boxes
+			    toggleStyledSelect(styledSelectBox);
+			    break;
+			  case KEYCODES.DOWN:
+			  case KEYCODES.UP:
+					// Move the highlight up and down
+					if ( ! styledSelectBox.classList.contains('open') ) {
+						// If style select is not open, up/down should open it.
+						toggleStyledSelect(styledSelectBox);
 					} else {
-						// Go down
-						if ( highlightedOptionIndex < highlightedOptionIndexMax ) {
-							log('down arrowfrom', highlightedOptionIndex, 'to', highlightedOptionIndex + 1)
-							highlightedOptionIndex = highlightedOptionIndex + 1
-						}
-					}
-					styleSelectOptions.forEach(function(option, index){
-						if ( index === highlightedOptionIndex ) {
-							option.classList.add('highlighted')
+						// If style select is already open, these should change what the highlighted option is
+						if ( ev.keyCode === KEYCODES.UP ) {
+							// Up arrow moves earlier in list
+							if ( highlightedOptionIndex !== 0 ) {
+								highlightedOptionIndex = highlightedOptionIndex - 1
+							}
 						} else {
-							option.classList.remove('highlighted')
+							// Down arrow moves later in list
+							if ( highlightedOptionIndex < highlightedOptionIndexMax ) {
+								highlightedOptionIndex = highlightedOptionIndex + 1
+							}
 						}
-					})
-				}
-				ev.preventDefault();
-				ev.stopPropagation();
-			}
+						styleSelectOptions.forEach(function(option, index){
+							if ( index === highlightedOptionIndex ) {
+								option.classList.add('highlighted')
+							} else {
+								option.classList.remove('highlighted')
+							}
+						})
+					}
+					ev.preventDefault();
+					ev.stopPropagation();
+					break;
+				// User has picked an item from the keyboard
+				case KEYCODES.ENTER:
+					var highlightedOption = styledSelectedOption.parentNode.querySelectorAll('.ss-option')[highlightedOptionIndex],
+						newValue = highlightedOption.dataset.value,
+						newLabel = highlightedOption.innerText
 
-			// User has picked an item from the keyboard
-			if ( ev.keyCode === KEYCODES.ENTER ) {
-				var highlightedOption = styledSelectedOption.parentNode.querySelectorAll('.ss-option')[highlightedOptionIndex],
-					newValue = highlightedOption.dataset.value,
-					newLabel = highlightedOption.innerText
-
-				changeRealSelectBox(newValue, newLabel)
-				ev.preventDefault();
-				ev.stopPropagation();
+					changeRealSelectBox(newValue, newLabel)
+					ev.preventDefault();
+					ev.stopPropagation();
+					break;
 			}
 		});
 
