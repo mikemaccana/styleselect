@@ -84,14 +84,17 @@ define(function() {
 		// And add out styled select just after the real select
 		realSelect.insertAdjacentHTML('afterend', styleSelectHTML);
 
-		var styleSelectOptions = queryAll('[data-ss-uuid='+uuid+'] .ss-option');
+		var styledSelect = query('.style-select[data-ss-uuid="'+uuid+'"]')
+		var styleSelectOptions = styledSelect.querySelectorAll('.ss-option');
+		var selectedOption = styledSelect.querySelector('.ss-selected-option')
 
 		var changeRealSelectBox = function(newValue, newLabel) {
-			// Set style select to show correct value
-			var selectedOption = query('.style-select[data-ss-uuid="' + uuid +'"] .ss-selected-option')
+			// Close styledSelect
+			styledSelect.classList.remove('open');
+
+			// Update styled value
 			selectedOption.innerText = newLabel;
 			selectedOption.dataset.value = newValue;
-			selectedOption.parentNode.classList.remove('open');
 
 			// Update the 'tick' that shows the option with the current value
 			styleSelectOptions.forEach(function(styleSelectOption){
