@@ -103,16 +103,18 @@ define(function() {
 			});
 		})
 
-		var closeAllStyleSelects = function(){
+		var closeAllStyleSelects = function(exception){
 			queryAll('.style-select').forEach(function(styleSelectEl) {
-				styleSelectEl.classList.remove('open');
+				if ( styleSelectEl !== exception ) {
+					styleSelectEl.classList.remove('open');
+				}
 			});
 		}
 
 		var toggleStyledSelect = function(styledSelectBox){
 			if ( ! styledSelectBox.classList.contains('open') ) {
-				// If we're closed and about to open, close all Style Selects (eg, other style selects on the page)
-				closeAllStyleSelects();
+				// If we're closed and about to open, close other style selects on the page
+				closeAllStyleSelects(styledSelectBox);
 			}
 			// Then toggle open/close
 			styledSelectBox.classList.toggle('open');
@@ -125,9 +127,13 @@ define(function() {
 			ev.stopPropagation();
 			toggleStyledSelect(ev.target.parentNode);
 		});
+
+		// Keyboard handling
 		styledSelectedOption.addEventListener('keydown', function(ev) {
+			var styledSelectBox = ev.target.parentNode
+			log('keyCode', ev.keyCode)
 			if ( ev.keyCode === KEYCODES.SPACE ) {
-				toggleStyledSelect(ev.target.parentNode);
+				toggleStyledSelect(styledSelectBox);
 			}
 		});
 
