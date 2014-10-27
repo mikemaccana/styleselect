@@ -58,6 +58,10 @@ define(function() {
 			uuid = makeUUID(),
 			styleSelectHTML = '<div class="style-select" data-ss-uuid="' + uuid + '">';
 
+		// The index of the item that's being highlighted by the mouse or keyboard
+		var highlightedOptionIndex;
+		var highlightedOptionIndexMax = realOptions.length - 1;
+
 		realSelect.setAttribute('data-ss-uuid', uuid);
 
 		// Build styled clones of all the real options
@@ -79,8 +83,9 @@ define(function() {
 		// And add out styled select just after the real select
 		realSelect.insertAdjacentHTML('afterend', styleSelectHTML);
 
-		// Change real select box when a styled option is clicked
 		var styleSelectOptions = queryAll('[data-ss-uuid='+uuid+'] .ss-option');
+
+		// Change real select box when a styled option is clicked
 		styleSelectOptions.forEach(function(unused, index){
 
 			var styleSelectOption = styleSelectOptions.item(index);
@@ -113,23 +118,27 @@ define(function() {
 				realSelect.dispatchEvent(changeEvent);
 			});
 
-			// Show a tick beside the option that's currently in use
+			// Tick and highlight the option that's currently in use
 			if ( styleSelectOption.dataset.value === realSelect.value ) {
+				highlightedOptionIndex = index;
 				styleSelectOption.classList.add('ticked');
 				styleSelectOption.classList.add('highlighted')
 			}
 
 			// Important: we can't use ':hover' as the keyboard and default value can also set the highlight
 			styleSelectOption.addEventListener('mouseover', function(ev){
-				styleSelectOption.parentNode.childNodes.forEach(function(sibling){
+				styleSelectOption.parentNode.childNodes.forEach(function(sibling, index){
 					if ( sibling === ev.target ) {
 						sibling.classList.add('highlighted')
+						highlightedOptionIndex = index;
 					} else {
 						sibling.classList.remove('highlighted')
 					}
 				})
 			})
 		})
+
+
 
 		var closeAllStyleSelects = function(exception){
 			queryAll('.style-select').forEach(function(styleSelectEl) {
@@ -159,12 +168,42 @@ define(function() {
 		// Keyboard handling
 		styledSelectedOption.addEventListener('keydown', function(ev) {
 			var styledSelectBox = ev.target.parentNode
-			log('keyCode', ev.keyCode)
 			// Space shows and hides styles select boxes
 			if ( ev.keyCode === KEYCODES.SPACE ) {
 				toggleStyledSelect(styledSelectBox);
 			}
 
+			// Move the highlight up and down
+			if ( ev.keyCode === KEYCODES.DOWN || ev.keyCode === KEYCODES.UP ) {
+				if ( ! styledSelectBox.classList.contains('open') ) {
+					// If style select is not open, up/down should open it.
+					toggleStyledSelect(styledSelectBox);
+				} else {
+					// If style select is already open, these should change what the highlighted option is
+					if ( ev.keyCode === KEYCODES.UP ) {
+						// Go up
+						if ( highlightedOptionIndex !== 0 ) {
+							log('up arrow from', highlightedOptionIndex, 'to', highlightedOptionIndex - 1)
+							highlightedOptionIndex = highlightedOptionIndex - 1
+						}
+					} else {
+						// Go down
+						if ( highlightedOptionIndex < highlightedOptionIndexMax ) {
+							log('down arrowfrom', highlightedOptionIndex, 'to', highlightedOptionIndex + 1)
+							highlightedOptionIndex = highlightedOptionIndex + 1
+						}
+					}
+					styledSelectedOption.parentNode.querySelectorAll('.ss-option').forEach(function(option, index){
+						if ( index === highlightedOptionIndex ) {
+							option.classList.add('highlighted')
+						} else {
+							option.classList.remove('highlighted')
+						}
+					})
+				}
+				ev.preventDefault();
+				ev.stopPropagation();
+			}
 		});
 
 		// Clicking outside of the styled select box closes any open styled select boxes
