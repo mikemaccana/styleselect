@@ -1,54 +1,55 @@
 define(function() {
-	// Selector String - CSS selector for a single style select box
-	var styleSelect = function(selector) {
+	// Quick aliases and polyfills if needed
+	var query = document.querySelector.bind(document);
+	var queryAll = document.querySelectorAll.bind(document);
+	var log = console.log.bind(console);
+	if ( ! NodeList.prototype.forEach ) {
+		NodeList.prototype.forEach = Array.prototype.forEach;
+	}
+	if ( ! HTMLCollection.prototype.forEach ) {
+		HTMLCollection.prototype.forEach = Array.prototype.forEach;
+	}
+	if ( ! Element.prototype.matches ) {
+		// See https://developer.mozilla.org/en-US/docs/Web/API/Element.matches
+		Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.webkitMatchesSelector || Element.prototype.oMatchesSelector
+	}
 
-		// Quick aliases and polyfills if needed
-		var query = document.querySelector.bind(document);
-		var queryAll = document.querySelectorAll.bind(document);
-		var log = console.log.bind(console);
-		if ( ! NodeList.prototype.forEach ) {
-			NodeList.prototype.forEach = Array.prototype.forEach;
-		}
-		if ( ! HTMLCollection.prototype.forEach ) {
-			HTMLCollection.prototype.forEach = Array.prototype.forEach;
-		}
-		if ( ! Element.prototype.matches ) {
-			// See https://developer.mozilla.org/en-US/docs/Web/API/Element.matches
-			Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.webkitMatchesSelector || Element.prototype.oMatchesSelector
-		}
+	var KEYCODES = {
+		SPACE: 32,
+		UP: 38,
+		DOWN: 40
+	}
 
-		var KEYCODES = {
-			SPACE: 32
-		}
-
-
-		// Return true if any ancestor matches selector
-		// Borrowed from ancestorMatches() from agave.js (MIT)
-		var isAncestorOf = function(element, selector, includeSelf) {
-		  var parent = element.parentNode;
-		  if ( includeSelf && element.matches(selector) ) {
+	// Return true if any ancestor matches selector
+	// Borrowed from ancestorMatches() from agave.js (MIT)
+	var isAncestorOf = function(element, selector, includeSelf) {
+	  var parent = element.parentNode;
+	  if ( includeSelf && element.matches(selector) ) {
+			return true
+	  }
+	  // While parents are 'element' type nodes
+	  // See https://developer.mozilla.org/en-US/docs/DOM/Node.nodeType
+	  while ( parent && parent.nodeType && parent.nodeType === 1 ) {
+		  if ( parent.matches(selector) ) {
 				return true
 		  }
-		  // While parents are 'element' type nodes
-		  // See https://developer.mozilla.org/en-US/docs/DOM/Node.nodeType
-		  while ( parent && parent.nodeType && parent.nodeType === 1 ) {
-			  if ( parent.matches(selector) ) {
-					return true
-			  }
-				parent = parent.parentNode;
-		  }
-		  return false;
-		};
+			parent = parent.parentNode;
+	  }
+	  return false;
+	};
 
 
-		// Used to match select boxes to their style select partners
-		var makeUUID = function(){
-			var UUID = 'ss-xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/x/g, function(c) {
-				var r = Math.random() * 16|0, v = c == 'x'? r : r&0x3|0x8;
-				return v.toString(16);
-			})
-			return UUID
-		}
+	// Used to match select boxes to their style select partners
+	var makeUUID = function(){
+		var UUID = 'ss-xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/x/g, function(c) {
+			var r = Math.random() * 16|0, v = c == 'x'? r : r&0x3|0x8;
+			return v.toString(16);
+		})
+		return UUID
+	}
+
+	// Selector String - CSS selector for a single style select box
+	var styleSelect = function(selector) {
 
 		var select = query(selector),
 			options = select.children,
@@ -132,13 +133,16 @@ define(function() {
 		styledSelectedOption.addEventListener('keydown', function(ev) {
 			var styledSelectBox = ev.target.parentNode
 			log('keyCode', ev.keyCode)
+			// Space shows and hides styles select boxes
 			if ( ev.keyCode === KEYCODES.SPACE ) {
 				toggleStyledSelect(styledSelectBox);
 			}
+
 		});
 
 		// Clicking outside of the styled select box closes any open styled select boxes
 		query('body').addEventListener('click', function(ev){
+
 			if ( ! isAncestorOf(ev.target, '.style-select', true) ) {
 				closeAllStyleSelects();
 			}
