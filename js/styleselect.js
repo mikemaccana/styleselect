@@ -14,6 +14,18 @@ define(function() {
 		Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.webkitMatchesSelector || Element.prototype.oMatchesSelector
 	}
 
+	// IE 9-11 CustomEvent polyfill
+	// From https://developer.mozilla.org/en/docs/Web/API/CustomEvent
+	var CustomEvent = function( eventName, params ) {
+		params = params || { bubbles: false, cancelable: false, detail: undefined };
+		var event = document.createEvent( 'CustomEvent' );
+		event.initCustomEvent( eventName, params.bubbles, params.cancelable, params.detail );
+		return event;
+	};
+	CustomEvent.prototype = window.Event.prototype;
+	window.CustomEvent = CustomEvent;
+
+
 	var KEYCODES = {
 		SPACE: 32,
 		UP: 38,
@@ -109,7 +121,7 @@ define(function() {
 			realSelect.value = newValue;
 
 			// Send 'change' event to real select - to trigger any change event listeners
-			var changeEvent = new Event('change');
+			var changeEvent = new CustomEvent('change');
 			realSelect.dispatchEvent(changeEvent);
 		}
 
