@@ -12,6 +12,10 @@ define(function() {
 		if ( ! HTMLCollection.prototype.forEach ) {
 			HTMLCollection.prototype.forEach = Array.prototype.forEach;
 		}
+		if ( ! Element.prototype.matches ) {
+			// See https://developer.mozilla.org/en-US/docs/Web/API/Element.matches
+			Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.webkitMatchesSelector || Element.prototype.oMatchesSelector
+		}
 
 
 		// Return true if any ancestor matches selector
