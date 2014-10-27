@@ -38,7 +38,6 @@ gulp.task('default', function() {
   });
 
   connect.server({
-    // root: ['_public'],
     port: 4242,
     livereload: true
   });
