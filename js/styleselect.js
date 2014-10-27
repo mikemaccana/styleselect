@@ -86,10 +86,10 @@ define(function() {
 
 			if (index === selectedIndex) {
 				// Mark first item as selected-option - this is where we store state for the styled select box
-				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" data-value="' + value + '">' + text + '</div>'
+				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" role="listbox" data-value="' + value + '">' + text + '</div>'
 			}
 			// Continue building optionsHTML
-			optionsHTML += '<div class="ss-option" data-value="' + value + '">' + text + '</div>';
+			optionsHTML += '<div class="ss-option" role="option" data-value="' + value + '">' + text + '</div>';
 		})
 		optionsHTML += '</div>';
 		styleSelectHTML += selectedOptionHTML += optionsHTML += '</div>';
