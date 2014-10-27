@@ -76,6 +76,10 @@ define(function() {
 		var highlightedOptionIndexMax = realOptions.length - 1;
 
 		realSelect.setAttribute('data-ss-uuid', uuid);
+		// Even though the element is display: none, a11y users should still see it.
+		// According to http://www.w3.org/TR/wai-aria/states_and_properties#aria-hidden
+		// some browsers may have bugs with this but future implementation may improve
+		realSelect.setAttribute('aria-hidden', "false");
 
 		// Build styled clones of all the real options
 		var selectedOptionHTML;
@@ -86,10 +90,11 @@ define(function() {
 
 			if (index === selectedIndex) {
 				// Mark first item as selected-option - this is where we store state for the styled select box
-				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" role="listbox" data-value="' + value + '">' + text + '</div>'
+				// aria-hidden=true so screen readers ignore the styles selext box in favor of the real one (which is visible by default)
+				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" aria-hidden="true" data-value="' + value + '">' + text + '</div>'
 			}
 			// Continue building optionsHTML
-			optionsHTML += '<div class="ss-option" role="option" data-value="' + value + '">' + text + '</div>';
+			optionsHTML += '<div class="ss-option" data-value="' + value + '">' + text + '</div>';
 		})
 		optionsHTML += '</div>';
 		styleSelectHTML += selectedOptionHTML += optionsHTML += '</div>';
