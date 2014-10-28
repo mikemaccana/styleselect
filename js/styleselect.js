@@ -85,7 +85,7 @@ define(function() {
 		var selectedOptionHTML;
 		var optionsHTML = '<div class="ss-dropdown">';
 		realOptions.forEach(function(realOption, index){
-			var text = realOption.innerText,
+			var text = realOption.textContent,
 				value = realOption.getAttribute('value') || '' ;
 
 			if (index === selectedIndex) {
@@ -110,7 +110,7 @@ define(function() {
 			styledSelect.classList.remove('open');
 
 			// Update styled value
-			selectedOption.innerText = newLabel;
+			selectedOption.textContent = newLabel;
 			selectedOption.dataset.value = newValue;
 
 			// Update the 'tick' that shows the option with the current value
@@ -139,7 +139,7 @@ define(function() {
 					styledSelectBox = target.parentNode.parentNode,
 					uuid = styledSelectBox.getAttribute('data-ss-uuid'),
 					newValue = target.getAttribute('data-value'),
-					newLabel = target.innerText;
+					newLabel = target.textContent;
 
 				changeRealSelectBox(newValue, newLabel)
 
@@ -235,7 +235,7 @@ define(function() {
 				case KEYCODES.ENTER:
 					var highlightedOption = styledSelectedOption.parentNode.querySelectorAll('.ss-option')[highlightedOptionIndex],
 						newValue = highlightedOption.dataset.value,
-						newLabel = highlightedOption.innerText
+						newLabel = highlightedOption.textContent
 
 					changeRealSelectBox(newValue, newLabel)
 					ev.preventDefault();
