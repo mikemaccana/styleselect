@@ -15,7 +15,9 @@ body {
 
 h1 {
   font-weight: 300;
-  text-align: center; }
+  text-align: center;
+  font-size: 10vw;
+  line-height: 12vw; }
 
 .download {
   width: 128px;
