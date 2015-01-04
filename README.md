@@ -16,6 +16,8 @@ There's also a live demo of the code in this repo. Just run `http-server` (or wh
 
 Open the JavaScript console on the demo page for more instructions.
 
+Note that since Android and iOS have specific touch-enabled features to ease their use on mobile, Style Select will not change select buttons on these platforms.
+
 ## Usage:
 
 ### SASS

@@ -3,6 +3,14 @@ define(function() {
 	var query = document.querySelector.bind(document);
 	var queryAll = document.querySelectorAll.bind(document);
 	var log = console.log.bind(console);
+
+	var KEYCODES = {
+		SPACE: 32,
+		UP: 38,
+		DOWN: 40,
+		ENTER: 13
+	}
+
 	if ( ! NodeList.prototype.forEach ) {
 		NodeList.prototype.forEach = Array.prototype.forEach;
 	}
@@ -97,14 +105,6 @@ define(function() {
 		}
 	}
 
-
-	var KEYCODES = {
-		SPACE: 32,
-		UP: 38,
-		DOWN: 40,
-		ENTER: 13
-	}
-
 	// Return true if any ancestor matches selector
 	// Borrowed from ancestorMatches() from agave.js (MIT)
 	var isAncestorOf = function(element, selector, includeSelf) {
@@ -137,6 +137,12 @@ define(function() {
 	// The 'styleSelect' main function
 	// selector:String - CSS selector for the select box to style
 	return function(selector) {
+
+		// Use native selects (which pop up large native UIs to go through the options ) on iOS/Android
+		if ( window.userAgent.match( /iPad|iPhone|Android/i ) ) {
+			return
+		}
+
 		var realSelect = query(selector),
 			realOptions = realSelect.children,
 			selectedIndex = realSelect.selectedIndex,
