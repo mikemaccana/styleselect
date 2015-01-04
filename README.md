@@ -2,15 +2,25 @@
 
 Simple, standalone styling for select boxes in modern browsers.
 
- - **Does not require jQuery**, or any other dependencies.
- - Designed to be hackable - no magic numbers, all variables exposed by SCSS variables for easy incoporation into your own look and feel.
- - Minimal out of the box styling, so you won't have to override anything.
- - Free of hacks - no CSS 'triangles'
- - Triggers 'change' events on real select boxes so you won't have to change event listeners.
+ - **Standalone** - runs on its own without any dependencies. If you're using vanilla JS and want to style a select box, you've come to the right place.
+ - **Correct** - Triggers 'change' events on real select boxes so you won't have to modify your existing event listeners.
+ - **Usable with the keyboard** - Appears in tab index, space shows and hides the options, up and down arrow changes the highlight option, enter selects the currently highlighted option.
+ - **Stylable** - designed for easy incorporation into your own look and feel. SCSS, free of magic numbers, CSS 'triangles', images, and other hacks. 
+ - **Accessable** - people using screen readers simply experience the regular, unstyled select box.
+
+ <h2>Demo</h2>
+
+ <p>So we've included `styleselect.scss` in our SASS and loaded the AMD module. To style a select box, just run `styleSelect` with a CSS-style selector:</p>
+
+ <code>styleSelect('select.some-class');</code>
+
+ <p>That's all. Here's one we just made: </p>
 
 ## Demo
 
-There's a live demo of the code in this repo. Just run `http-server` (or whatever your preferred static webserver is) in the current directory.
+There's a live demo at http://mikemaccana.github.io/styleselect/.
+
+There's also a live demo of the code in this repo. Just run `http-server` (or whatever your preferred static webserver is) in the current directory.
 
 Open the JavaScript console on the demo page for more instructions.
 
