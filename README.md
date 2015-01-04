@@ -26,9 +26,21 @@ Include `styleselect.scss` in your project.
 
 ### JS
 
-Style Select is a require/AMD module:
+#### Import module 
+
+Style Select supports both AMD/require.js or npm/browserify modules:
+
+For AMD/require.js users:
+
+    define('styleselect', function(styleSelect){
+        ...
+    });
+
+For npm/browserify users:
 
     var styleSelect = require('styleSelect');
+
+#### Style a select box
 
 To style a select box:
 
