@@ -1,6 +1,7 @@
 {
   "name": "styleselect",
-  "version": "0.0.5",
+  "version": "0.0.6",
+  "main": "js/styleselect.js",
   "devDependencies": {
     "gulp": "3.3.1",
     "gulp-autoprefixer": "0.0.3",
