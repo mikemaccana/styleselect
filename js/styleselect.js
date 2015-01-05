@@ -1,4 +1,4 @@
-// UMD module from From https://github.com/umdjs/umd/blob/master/returnExports.js
+// UMD module from https://github.com/umdjs/umd/blob/master/returnExports.js
 // From 'if the module has no dependencies' example.
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
