@@ -156,7 +156,7 @@
 	return function(selector) {
 
 		// Use native selects (which pop up large native UIs to go through the options ) on iOS/Android
-		if ( window.userAgent.match( /iPad|iPhone|Android/i ) ) {
+		if ( navigator.userAgent.match( /iPad|iPhone|Android/i ) ) {
 			return
 		}
 
