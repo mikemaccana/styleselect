@@ -21,7 +21,6 @@ select[data-ss-uuid] {
     background-image: -webkit-linear-gradient(top, #fefefe, #f2f2f2);
     background-image: linear-gradient(to bottom, #fefefe, #f2f2f2);
     border-radius: 2px;
-    border-color: #b8b8b8;
     padding: 6px;
     border: 1px solid #d0d0d0; }
     .style-select .ss-selected-option::after {
@@ -46,6 +45,8 @@ select[data-ss-uuid] {
       background-color: white; }
       .style-select .ss-dropdown .ss-option.highlighted {
         background-color: #f2f4f8; }
+      .style-select .ss-dropdown .ss-option.disabled {
+        color: #d0d0d0; }
       .style-select .ss-dropdown .ss-option.ticked::before {
         content: "✓";
         padding-right: 3px; }
