@@ -26,7 +26,7 @@
 		UP: 38,
 		DOWN: 40,
 		ENTER: 13
-	}
+	};
 
 	if ( ! NodeList.prototype.forEach ) {
 		NodeList.prototype.forEach = Array.prototype.forEach;
@@ -146,9 +146,9 @@
 		var UUID = 'ss-xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/x/g, function(c) {
 			var r = Math.random() * 16|0, v = c == 'x'? r : r&0x3|0x8;
 			return v.toString(16);
-		})
+		});
 		return UUID
-	}
+	};
 
 
 	// The 'styleSelect' main function
@@ -190,15 +190,15 @@
 			}
 			// Continue building optionsHTML
 			optionsHTML += '<div class="ss-option" data-value="' + value + '">' + text + '</div>';
-		})
+		});
 		optionsHTML += '</div>';
 		styleSelectHTML += selectedOptionHTML += optionsHTML += '</div>';
 		// And add out styled select just after the real select
 		realSelect.insertAdjacentHTML('afterend', styleSelectHTML);
 
-		var styledSelect = query('.style-select[data-ss-uuid="'+uuid+'"]')
+		var styledSelect = query('.style-select[data-ss-uuid="'+uuid+'"]');
 		var styleSelectOptions = styledSelect.querySelectorAll('.ss-option');
-		var selectedOption = styledSelect.querySelector('.ss-selected-option')
+		var selectedOption = styledSelect.querySelector('.ss-selected-option');
 
 		var changeRealSelectBox = function(newValue, newLabel) {
 			// Close styledSelect
@@ -215,7 +215,7 @@
 				} else {
 					styleSelectOption.classList.remove('ticked')
 				}
-			})
+			});
 
 			// Update real select box
 			realSelect.value = newValue;
@@ -223,7 +223,7 @@
 			// Send 'change' event to real select - to trigger any change event listeners
 			var changeEvent = new CustomEvent('change');
 			realSelect.dispatchEvent(changeEvent);
-		}
+		};
 
 		// Change real select box when a styled option is clicked
 		styleSelectOptions.forEach(function(unused, index){
@@ -251,14 +251,14 @@
 			styleSelectOption.addEventListener('mouseover', function(ev){
 				styleSelectOption.parentNode.childNodes.forEach(function(sibling, index){
 					if ( sibling === ev.target ) {
-						sibling.classList.add('highlighted')
+						sibling.classList.add('highlighted');
 						highlightedOptionIndex = index;
 					} else {
 						sibling.classList.remove('highlighted')
 					}
 				})
 			})
-		})
+		});
 
 
 
@@ -268,7 +268,7 @@
 					styleSelectEl.classList.remove('open');
 				}
 			});
-		}
+		};
 
 		var toggleStyledSelect = function(styledSelectBox){
 			if ( ! styledSelectBox.classList.contains('open') ) {
@@ -277,10 +277,10 @@
 			}
 			// Then toggle open/close
 			styledSelectBox.classList.toggle('open');
-		}
+		};
 
 		// When a styled select box is clicked
-		var styledSelectedOption = query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option')
+		var styledSelectedOption = query('.style-select[data-ss-uuid="' + uuid + '"] .ss-selected-option');
 		styledSelectedOption.addEventListener('click', function(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
@@ -289,7 +289,7 @@
 
 		// Keyboard handling
 		styledSelectedOption.addEventListener('keydown', function(ev) {
-			var styledSelectBox = ev.target.parentNode
+			var styledSelectBox = ev.target.parentNode;
 
 			switch (ev.keyCode) {
 				case KEYCODES.SPACE:
@@ -330,9 +330,9 @@
 				case KEYCODES.ENTER:
 					var highlightedOption = styledSelectedOption.parentNode.querySelectorAll('.ss-option')[highlightedOptionIndex],
 						newValue = highlightedOption.dataset.value,
-						newLabel = highlightedOption.textContent
+						newLabel = highlightedOption.textContent;
 
-					changeRealSelectBox(newValue, newLabel)
+					changeRealSelectBox(newValue, newLabel);
 					ev.preventDefault();
 					ev.stopPropagation();
 					break;
