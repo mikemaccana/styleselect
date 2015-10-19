@@ -179,15 +179,21 @@
 		var optionsHTML = '<div class="ss-dropdown">';
 		realOptions.forEach(function(realOption, index){
 			var text = realOption.textContent,
-				value = realOption.getAttribute('value') || '' ;
+				value = realOption.getAttribute('value') || '',
+                cssClass = 'ss-option';
 
 			if (index === selectedIndex) {
 				// Mark first item as selected-option - this is where we store state for the styled select box
 				// aria-hidden=true so screen readers ignore the styles selext box in favor of the real one (which is visible by default)
 				selectedOptionHTML = '<div class="ss-selected-option" tabindex="0" data-value="' + value + '">' + text + '</div>'
 			}
-			// Continue building optionsHTML
-			optionsHTML += '<div class="ss-option" data-value="' + value + '">' + text + '</div>';
+
+            if (realOption.disabled) {
+                cssClass += ' disabled';
+            }
+
+            // Continue building optionsHTML
+			optionsHTML += '<div class="' + cssClass + '" data-value="' + value + '">' + text + '</div>';
 		});
 		optionsHTML += '</div>';
 		styleSelectHTML += selectedOptionHTML += optionsHTML += '</div>';
@@ -225,9 +231,13 @@
 
 		// Change real select box when a styled option is clicked
 		styleSelectOptions.forEach(function(unused, index){
-
 			var styleSelectOption = styleSelectOptions.item(index);
-			styleSelectOption.addEventListener('click', function(ev) {
+
+            if (styleSelectOption.className.match(/\bdisabled\b/)) {
+                return;
+            }
+
+            styleSelectOption.addEventListener('click', function(ev) {
 				var target = ev.target,
 					styledSelectBox = target.parentNode.parentNode,
 					uuid = styledSelectBox.getAttribute('data-ss-uuid'),
