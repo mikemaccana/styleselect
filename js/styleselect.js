@@ -19,7 +19,6 @@
 	// Quick aliases and polyfills if needed
 	var query = document.querySelector.bind(document);
 	var queryAll = document.querySelectorAll.bind(document);
-	var log = console.log.bind(console);
 
 	var KEYCODES = {
 		SPACE: 32,
