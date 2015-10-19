@@ -38,7 +38,6 @@ select[data-ss-uuid] {
 		width: 100%;
 		background-image: $selected-option-background;
 		border-radius: 2px;
-		border-color: #b8b8b8;
 		padding: $spacing-tiny;
 		border: $standard-border;
 		// The down arrow
@@ -69,6 +68,9 @@ select[data-ss-uuid] {
 			// and we want keyboard highlighting too
 			&.highlighted {
 				background-color: $highlight-color;
+			}
+			&.disabled {
+				color: #d0d0d0;
 			}
 			&.ticked::before {
 				content: "✓";
