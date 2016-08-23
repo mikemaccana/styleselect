@@ -158,7 +158,7 @@
 			return
 		}
 
-		var realSelect = query(selector),
+		var realSelect = typeof selector == 'object' ? selector : query(selector),
 			realOptions = realSelect.children,
 			selectedIndex = realSelect.selectedIndex,
 			uuid = makeUUID(),
