@@ -5,7 +5,7 @@
  - **Standalone** - runs on its own without any dependencies. If you're using vanilla JS and want to style a select box, you've come to the right place.
  - **Correct** - Triggers 'change' events on real select boxes so you won't have to modify your existing event listeners.
  - **Usable with the keyboard** - Appears in tab index, space shows and hides the options, up and down arrow changes the highlight option, enter selects the currently highlighted option.
- - **Stylable** - designed for easy incorporation into your own look and feel. SCSS, free of magic numbers, CSS 'triangles', images, and other hacks. 
+ - **Stylable** - designed for easy incorporation into your own look and feel. SCSS, free of magic numbers, CSS 'triangles', images, and other hacks.
  - **Accessable** - people using screen readers simply experience the regular, unstyled select box.
 
 ## Demo
@@ -26,7 +26,7 @@ Include `styleselect.scss` in your project.
 
 ### JS
 
-#### Import module 
+#### Import module
 
 Style Select supports both AMD/require.js or npm/browserify modules:
 
@@ -46,7 +46,11 @@ To style a select box:
 
     styleSelect(selector);
 
-Where `selector` is a CSS selector.
+or
+
+    styleSelect(element);
+
+Where `selector` is a CSS selector and `element` is an HTML Element or NodeList.
 
 That's all. From then on you'll probably want to tweak styling.
 
