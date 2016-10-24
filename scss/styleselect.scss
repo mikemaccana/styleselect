@@ -1,15 +1,15 @@
-$line-height: 19px;
-$border-width: 1px;
-$spacing: 24px;
+$ss-line-height: 19px;
+$ss-border-width: 1px;
+$ss-spacing: 24px;
 
-$highlight-color: rgb(242, 244, 248);
-$selected-option-background: linear-gradient(to bottom, #fefefe, #f2f2f2);
-$dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+$ss-highlight-color: rgb(242, 244, 248);
+$ss-selected-option-background: linear-gradient(to bottom, #fefefe, #f2f2f2);
+$ss-dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
-$standard-border: $border-width solid #d0d0d0;
+$ss-standard-border: $ss-border-width solid #d0d0d0;
 
-$spacing-small: $spacing / 2;
-$spacing-tiny: $spacing / 4;
+$ss-spacing-small: $ss-spacing / 2;
+$ss-spacing-tiny: $ss-spacing / 4;
 
 // Hide real select boxes which have seen styled.
 select[data-ss-uuid] {
@@ -28,7 +28,7 @@ select[data-ss-uuid] {
 		margin: 0;
 		box-sizing: border-box;
 		text-align: left;
-		line-height: $line-height;
+		line-height: $ss-line-height;
 		color: black;
 		font-weight: 300;
 		cursor: pointer;
@@ -36,38 +36,38 @@ select[data-ss-uuid] {
 
 	.ss-selected-option {
 		width: 100%;
-		background-image: $selected-option-background;
+		background-image: $ss-selected-option-background;
 		border-radius: 2px;
-		padding: $spacing-tiny;
-		border: $standard-border;
+		padding: $ss-spacing-tiny;
+		border: $ss-standard-border;
 		// The down arrow
 		&::after {
 			content: "▾";
 			position: absolute;
-			top: $spacing-tiny;
-			right: $spacing-small;
+			top: $ss-spacing-tiny;
+			right: $ss-spacing-small;
 			display: block;
 		}
 	}
 
 	.ss-dropdown {
-		top: $line-height + 2 * $spacing-tiny + $border-width;
+		top: $ss-line-height + 2 * $ss-spacing-tiny + $ss-border-width;
 		left: 0;
 		position: absolute;
 		float: left;
 		width: 100%;
 		display: none;
-		box-shadow: $dropdown-shadow;
-		border: $standard-border;
+		box-shadow: $ss-dropdown-shadow;
+		border: $ss-standard-border;
 		border-top: 0 none;
 		.ss-option {
 			width: 100%;
-			padding: $spacing-tiny;
+			padding: $ss-spacing-tiny;
 			background-color: white;
 			// We don't use :hover as that's only for mouse
 			// and we want keyboard highlighting too
 			&.highlighted {
-				background-color: $highlight-color;
+				background-color: $ss-highlight-color;
 			}
 			&.disabled {
 				color: #d0d0d0;
