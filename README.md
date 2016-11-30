@@ -2,6 +2,8 @@
 
 ## Full styling for select boxes. No jQuery.
 
+Style select is:
+
  - **Standalone** - runs on its own without any dependencies. If you're using vanilla JS and want to style a select box, you've come to the right place.
  - **Correct** - Triggers 'change' events on real select boxes so you won't have to modify your existing event listeners.
  - **Usable with the keyboard** - Appears in tab index, space shows and hides the options, up and down arrow changes the highlight option, enter selects the currently highlighted option.
