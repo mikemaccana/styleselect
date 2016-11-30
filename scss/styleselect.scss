@@ -1,15 +1,15 @@
-$ss-line-height: 19px;
-$ss-border-width: 1px;
-$ss-spacing: 24px;
+$ss-line-height: 19px !default;
+$ss-border-width: 1px !default;
+$ss-spacing: 24px !default;
 
-$ss-highlight-color: rgb(242, 244, 248);
-$ss-selected-option-background: linear-gradient(to bottom, #fefefe, #f2f2f2);
-$ss-dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+$ss-highlight-color: rgb(242, 244, 248) !default;
+$ss-selected-option-background: linear-gradient(to bottom, #fefefe, #f2f2f2) !default;
+$ss-dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !default;
 
-$ss-standard-border: $ss-border-width solid #d0d0d0;
+$ss-standard-border: $ss-border-width solid #d0d0d0 !default;
 
-$ss-spacing-small: $ss-spacing / 2;
-$ss-spacing-tiny: $ss-spacing / 4;
+$ss-spacing-small: $ss-spacing / 2 !default;
+$ss-spacing-tiny: $ss-spacing / 4 !default;
 
 // Hide real select boxes which have seen styled.
 select[data-ss-uuid] {
